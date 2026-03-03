@@ -1,2 +1,6 @@
 Lab Project Data/*
 settings.config
+venv/*
+
+.idea/
+.vscode/
