@@ -21,6 +21,10 @@ CREATE TABLE ROOMTYPE(
 TypeId INT PRIMARY KEY,
 TypeName VARCHAR(100) UNIQUE NOT NULL);
 
+CREATE TABLE ROOMSPACE(
+TypeId INT PRIMARY KEY,
+TypeName VARCHAR(100) UNIQUE NOT NULL);
+
 CREATE TABLE FLOORPLANS(
 FImagePath VARCHAR(400) PRIMARY KEY,
 BNumber VARCHAR(100) NOT NULL,
@@ -34,9 +38,11 @@ BNumber VARCHAR(100),
 RNumber VARCHAR(100),
 SqFt FLOAT, 
 BoxCoordinates POLYGON,
+HasBackup BIT,
 FNumber INT,
 FBNumber VARCHAR(100),
 RoomType INT,
+RoomSpace INT
 CONSTRAINT FK_BNumberRooms
     FOREIGN KEY (BNumber)
     REFERENCES BUILDINGS(BNumber),
@@ -47,6 +53,9 @@ CONSTRAINT FK_FNumberRooms
 CONSTRAINT FK_RoomRType
     FOREIGN KEY (RoomType)
     REFERENCES ROOMTYPE(TypeId));
+CONSTRAINT FK_RoomRSpace
+    FOREIGN KEY (RoomSpace)
+    REFERENCES ROOMSPACE(TypeId));
 
 CREATE TABLE EQUIPMENT(
 TypeId INT PRIMARY KEY,
@@ -153,7 +162,6 @@ DeptID INT,
 BNumber VARCHAR(100),
 RNumber VARCHAR(100),
 Quantity INT,
-HasBackup BIT,
 DateAssigned TIMESTAMP,
 CONSTRAINT FK_DeptOccup
     FOREIGN KEY (DeptID)
@@ -168,6 +176,7 @@ EquipType INT,
 RNumber VARCHAR(100),
 BNumber VARCHAR(100),
 DateAssigned TIMESTAMP,
+Comments VARCHAR(200),
 CONSTRAINT FK_EquipTypeRooms
     FOREIGN KEY (EquipType)
     REFERENCES EQUIPMENT(TypeId),
@@ -175,3 +184,21 @@ CONSTRAINT FK_EquipRooms
     FOREIGN KEY (BNumber, RNumber)
     REFERENCES ROOMS(BNumber, RNumber),
 PRIMARY KEY(EquipType, BNumber, RNumber));
+
+CREATE TABLE CONTACTPERSONS(
+    EquipType INT,
+    RNumber VARCHAR(100),
+    BNumber VARCHAR(100),
+    Email VARCHAR(100),
+    Type VARCHAR(7),
+    CONSTRAINT FK_EquipContact
+        FOREIGN KEY (EquipType)
+        REFERENCES EQUIPMENT(TypeId),
+    CONSTRAINT FK_RoomContact
+        FOREIGN KEY (BNumber, RNumber)
+        REFERENCES ROOMS(BNumber, RNumber),
+    CONSTRAINT FK_ContactEmail
+        FOREIGN KEY (Email)
+        REFERENCES STAFFandFACULTY(Email),
+    PRIMARY KEY(EquipType, BNumber, RNumber, Email));
+)
