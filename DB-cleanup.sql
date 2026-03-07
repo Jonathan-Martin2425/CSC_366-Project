@@ -4,6 +4,9 @@ Brooke Saaty (bsaaty@calpoly.edu)
 Davis Morales (dmoral45@calpoly.edu)
 Jonathan Martin (jmart663@calpoly.edu)*/
 
+use pathfinder;
+DROP TABLE CONTACTPERSONS;
+
 DROP TABLE EQUIPtoROOM;
 
 DROP TABLE DEPTOCCUPANT;
@@ -33,6 +36,8 @@ DROP TABLE ROOMS;
 DROP TABLE FLOORPLANS;
 
 DROP TABLE ROOMTYPE;
+
+DROP TABLE ROOMSPACE;
 
 DROP TABLE FLOORS;
 
