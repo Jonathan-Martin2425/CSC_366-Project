@@ -106,19 +106,6 @@ CREATE TABLE ACTIONS(
     Descript VARCHAR(300)
 );
 
-CREATE TABLE EQUIPMENTACTIONS(
-    ActionID INT,
-    EquipID INT,
-    Duration VARCHAR(100),
-    CONSTRAINT FK_EquipType
-        FOREIGN KEY (EquipID)
-        REFERENCES EQUIPMENT(TypeId),
-    CONSTRAINT FK_ActionID
-        FOREIGN KEY (ActionID)
-        REFERENCES ACTIONS(AId),
-    PRIMARY KEY(ActionID, EquipID)
-);
-
 CREATE TABLE LOGRECORDS(
 ActionId INT PRIMARY KEY,
 RTime TIMESTAMP UNIQUE NOT NULL,
@@ -187,6 +174,21 @@ CONSTRAINT FK_EquipRooms
     REFERENCES ROOMS(BNumber, RNumber),
 PRIMARY KEY(EquipType, BNumber, RNumber));
 
+CREATE TABLE EQUIPMENTACTIONS(
+    ActionID INT,
+    EquipID INT,
+    BNumber VARCHAR(100),
+    RNumber VARCHAR(100),
+    Duration VARCHAR(100),
+    CONSTRAINT FK_EquipAction
+        FOREIGN KEY (ActionID)
+        REFERENCES ACTIONS(AId),
+    CONSTRAINT FK_EquipRoomAction
+        FOREIGN KEY (EquipID, BNumber, RNumber)
+        REFERENCES EQUIPtoROOM(EquipType, BNumber, RNumber),
+    PRIMARY KEY(ActionID, EquipID, BNumber, RNumber, Duration)
+);
+
 CREATE TABLE CONTACTPERSONS(
     EquipType INT,
     RNumber VARCHAR(100),
@@ -202,4 +204,4 @@ CREATE TABLE CONTACTPERSONS(
     CONSTRAINT FK_ContactEmail
         FOREIGN KEY (Email)
         REFERENCES STAFFandFACULTY(Email),
-    PRIMARY KEY(EquipType, BNumber, RNumber, Email));
+    PRIMARY KEY(EquipType, RNumber, BNumber, Email, Type));
