@@ -1,6 +1,7 @@
 import csv
 import re
 from typing import List
+from time import sleep
 
 
 def parse_csv(filename: str, has_header: bool = True):
@@ -93,7 +94,8 @@ def reg_room_num_to_table_notation(room_num: str) -> str | list | None:
         return [f"10{i}" for i in range(1, 8)]
     if(room_num == "D8-10"):
         return [f"0D{i:02d}-00" for i in range(8, 11)]
-    # extracts number and potential letter for a room
+
+    # extracts number and potential letters for a room
     match = re.fullmatch(r"(\d{1,3})([A-Za-z]?)([A-Za-z]?)", room_num.strip())
     number, letter1, letter2 = match.groups()
 
@@ -110,3 +112,19 @@ def reg_room_num_to_table_notation(room_num: str) -> str | list | None:
 def parse_contact(line: str) -> list[str]:
     split = line.split()
     return split
+
+def floorplan_roomnum_to_table_notation(room_num: str) -> str | list | None:
+
+    # extracts number and potential letters for a room
+    match = re.fullmatch(r"([A-Za-z]?)(\d{1,3})([A-Za-z]?)", room_num.strip())
+    letter1, number, letter2 = match.groups()
+
+    # pads number with 0s
+    number_padded = number.zfill(3)
+
+    # if there is no letter, uses 0 instead to
+    letter1 = letter1.upper() if letter1 else "0"
+
+    letter2 = letter2.upper() if letter2 else "0"
+
+    return f"0{number_padded}-{letter2}{letter1}"

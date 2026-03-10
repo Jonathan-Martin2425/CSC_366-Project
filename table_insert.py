@@ -275,7 +275,7 @@ def insert_equipment(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, f
     cursor.executemany(statement, backup_power_rooms)
 
     # add this room, because it doesn't exist and is only defined here
-    statement = "INSERT INTO ROOMS (BNumber, RNumber, SqFt, BoxCoordinates, HasBackup, FNumber, FBNumber, RoomType, RoomSpace) VALUES ('043', '0 0251-00', NULL, NULL, 0, '2', '043', NULL, NULL);"
+    statement = "INSERT INTO ROOMS (BNumber, RNumber, SqFt, BoxCoordinates, HasBackup, FNumber, FBNumber, RoomType, RoomSpace) VALUES ('043', '0251-00', NULL, NULL, 0, '2', '043', NULL, NULL);"
     cursor.execute(statement)
 
     statement = "INSERT INTO EQUIPtoROOM (EquipType, RNumber, BNumber, DateAssigned, Comments) VALUES (%s, %s, %s, NOW(), NULL);"
@@ -304,6 +304,53 @@ def insert_equipment(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, f
 
     DB.commit()
 
+def insert_floorplans(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, filename: str):
+    floorPlanCSV = read_csv_with_encoding(filename, has_header=True)
+
+    roomCoordinates = []
+    floor_plan_data = set()
+    newRooms = []
+
+    for plan in floorPlanCSV:
+        plan_name = plan["Filename"]
+        building_id = parser_util.literal_intstr_to_0intstr(plan["Building"])
+        room_num = parser_util.floorplan_roomnum_to_table_notation(plan["Room"])
+        floor_num = plan["Floor"]
+        BoxCords = (float(plan["TopLeftX"]), float(plan["TopLeftY"]), float(plan["BottomRightX"]), float(plan["BottomRightY"]))
+
+        if (room_num[-1] != "0" and (building_id, room_num, floor_num, building_id) not in newRooms):
+            newRooms.append((building_id, room_num, floor_num, building_id))
+        roomCoordinates.append((BoxCords[0], BoxCords[3], BoxCords[2], BoxCords[3], BoxCords[2], BoxCords[1], BoxCords[0], BoxCords[1], BoxCords[0], BoxCords[3], building_id, room_num))
+        floor_plan_data.add((plan_name, building_id, floor_num))
+
+    statement = "INSERT INTO ROOMS (BNumber, RNumber, SqFt, BoxCoordinates, HasBackup, FNumber, FBNumber, RoomType, RoomSpace) VALUES (%s, %s, NULL, NULL, 0, %s, %s, NULL, NULL);"
+    cursor.executemany(statement, newRooms)
+
+    statement = """
+    UPDATE ROOMS
+        SET BoxCoordinates = ST_GeomFromText(
+          CONCAT(
+            'POLYGON((',
+            %s, ' ', %s, ', ',
+            %s, ' ', %s, ', ',
+            %s, ' ', %s, ', ',
+            %s, ' ', %s, ', ',
+            %s, ' ', %s,
+            '))'
+          )
+        )
+        WHERE BNumber = %s AND RNumber = %s;
+    """
+    cursor.executemany(statement, roomCoordinates)
+
+    statement = "INSERT INTO FLOORPLANS (FImagePath, BNumber, FNumber) VALUES (%s, %s, %s);"
+    cursor.executemany(statement, list(floor_plan_data))
+
+    DB.commit()
+
+
+
+
 # --- Main Script ---
 if __name__ == "__main__":
     DB = make_connection("settings.config")
@@ -318,7 +365,7 @@ if __name__ == "__main__":
     emails = insert_staffAndFaculty(cursor, DB, "Lab Project Data/BCSM Faculty and departments.csv")
     emails.extend([i[0] for i in insert_rooms(cursor, DB, "Lab Project Data/BCSM Rooms.csv", emails)])
     insert_equipment(cursor, DB, "Lab Project Data/Critical BCSM Equipment.csv", emails)
-    # create insert_floorplans
+    insert_floorplans(cursor, DB, "Lab Project Data/Floorplans.csv")
     # create insert_staffandfaculty updated
 
     # Add default users
