@@ -336,5 +336,7 @@ if __name__ == "__main__":
         else:
             print(f"User {user['Email']} already exists, skipping.")
 
+    DB.commit()
+
     cursor.close()
     DB.close()
