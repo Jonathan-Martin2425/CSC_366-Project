@@ -1,6 +1,7 @@
 from connector import make_connection
 from permissions import check_permission
 
+
 def getRooms(buildingNumber, floorNumber):
     if not check_permission("getRooms"):
         raise PermissionError("Permission denied")
@@ -206,7 +207,6 @@ if __name__ == "__main__":
     print("\nTesting findRoom()")
     room = findRoom("033", "1", 100, 200)
     print(room)
-
 
     print("\nTesting getRoomInfo()")
     info = getRoomInfo("033", "0 0378-00")
