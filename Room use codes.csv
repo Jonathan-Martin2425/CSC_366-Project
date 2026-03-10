@@ -1,0 +1,151 @@
+010 - Custodial
+020 - Corridor / Circulation
+021 - Lobby
+022 - Stairway
+023 - Elevator
+030 - Mechanical
+031 - Electrical
+032 - Telephone
+033 - Telecom Closet
+034 - Telecom/High Voltage Closet
+035 - All Gender Restroom
+036 - Men's Restroom
+037 - Women's Restroom
+038 - Lactation Room
+040 - Miscellaneous Unassignable
+050 - Inactive Area
+060 - Alteration Conversion
+070 - Unfinished Area
+099 - Unclassified
+110 - Lecture
+111 - University Classroom
+112 - Department Lecture
+115 - Lecture Service
+210 - Teaching Lab
+211 - Special Instruction
+212 - Special Space Education
+213 - Department Lab
+215 - Teaching Lab Service
+216 - Other Special Support
+220 - Self Instruction Computer Lab
+221 - Self Instruction Lab
+222 - Music Practice Studio
+250 - Research Lab
+255 - Research Lab Service
+310 - Faculty Office
+311 - Staff Office
+"312 - Admin Office - Dept Head, Lib, Dir, Assoc. Dean"
+"313 - Admin Office - Dean, Chair, AVP"
+314 - Admin Office - VP
+315 - Office Service
+316 - Faculty Office - Dept
+320 - Student Office
+325 - Student Office Service
+330 - Other Office
+340 - President
+350 - Conference Room
+410 - Library Study Hall
+411 - Library Carrel
+412 - Library Special Study
+420 - Library Stack Area
+421 - Library MAC Shelving
+430 - Library Stack Study
+431 - Library Collaborative Learning/Study
+455 - Library Service
+510 - Military Science
+520 - Athletic or Physical Education - Indoor
+521 - Athletic or Physical Education - Outdoor
+523 - Athletic Facilities Spectator Seating
+525 - Athletic or Physical Education Service
+530 - Audio Visual
+540 - Clinic
+545 - Clinic Service
+560 - Field Building
+561 - Field Areas
+570 - Animal Quarters
+575 - Animal Quarters Service
+580 - Greenhouse
+590 - Other General Mise
+591 - Student Use
+592 - Administrative Use
+593 - Faculty Use
+610 - Auditoria
+611 - Stage
+615 - Auditoria Service
+620 - Museum and Galleries
+625 - Museum and Galleries Service
+630 - Food Facility
+635 - Food Facility Service
+640 - Day Care
+645 - Day Care Service
+650 - Lounge
+651 - Collaborative Learning/Study
+660 - Merchandising
+665 - Merchandising Service
+670 - Recreation
+675 - Recreation Service
+676 - Locker Rooms
+680 - Meeting Room
+685 - Meeting Room Service
+690 - Parking
+710 - Central Computer or Telecom
+715 - Central Computer or Telecom Service
+720 - Equip Maintenance/Repair Shop
+725 - Equip Maintenance/Repair Shop Service
+730 - Warehouse
+735 - Warehouse Service
+740 - Vehicle Storage
+745 - Vehicle Storage Service
+750 - Central Service
+755 - Central Service Support
+760 - Hazardous Materials Storage
+770 - Hazardous Waste Storage
+775 - Hazardous Waste Service
+780 - General Storage
+781 - Admin Stockroom
+810 - Patient Bedroom
+815 - Patient Bedroom Service
+820 - Patient Bath
+830 - Nurse Station
+835 - Nurse Station Service
+840 - Surgery
+845 - Surgery Service
+850 - Treatment/Examination Clinic
+855 - Treatment/Examination Clinic Service
+860 - Diagnostic Service Laboratory
+865 - Diagnostic Service Laboratory Support
+870 - Central Supplies
+880 - Public Waiting
+890 - Staff On-Call Facility
+895 - Staff On-Call Facility Service
+910 - ResHall Bedroom
+911 - ResHall Bedroom - ADA
+912 - ResHall Bedroom - RA
+917 - ResHall Bathroom - All Gender
+918 - ResHall Bathroom - ADA
+919 - ResHall Bathroom
+920 - Apartment Bedroom
+921 - Apartment Bedroom - ADA
+922 - Apartment Bedroom - RA
+923 - Apartment Bedroom - CSD
+924 - Apartment Bedroom - Guest
+925 - Apartment Common Living
+926 - Apartment Kitchen
+927 - Apartment Bathroom - All Gender
+928 - Apartment Bathroom - ADA
+929 - Apartment Bathroom
+930 - Laundry Room
+931 - Mail Room
+932 - Vending Machine Room
+933 - Community Kitchen
+935 - Storage Closet
+936 - Student Use Closet
+937 - Locker Room
+938 - Exercise Room
+939 - Front Desk
+940 - Lounge
+941 - Study Lounge
+950 - Apartment
+955 - Apartment Service
+970 - House
+999 - Code Not Given
