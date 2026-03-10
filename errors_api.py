@@ -6,6 +6,7 @@ ERR_TYPE = 4
 ERR_LOGGING = 5
 ERR_NOT_FOUND = 6
 ERR_UNKNOWN = 7
+ERR_PERMISSION = 8
 
 ERROR_MESSAGES = {
     SUCCESS: "Success",
@@ -15,5 +16,6 @@ ERROR_MESSAGES = {
     ERR_TYPE: "Invalid data type",
     ERR_LOGGING: "Logging failure",
     ERR_NOT_FOUND: "Record not found",
-    ERR_UNKNOWN: "Unknown error occurred"
+    ERR_UNKNOWN: "Unknown error occurred",
+    ERR_PERMISSION: "Incorrect permission level"
 }
