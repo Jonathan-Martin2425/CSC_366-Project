@@ -196,8 +196,19 @@ def getRoomInfo(buildingNumber, roomNumber):
         "Equipment": equipment
     }
 
-if __name__ == "__main__":
-    info = getRoomInfo("033", "0 0366-00")
 
+if __name__ == "__main__":
+    print("Testing getRooms()")
+    rooms = getRooms("033", "1")
+    for room in rooms:
+        print(room)
+
+    print("\nTesting findRoom()")
+    room = findRoom("033", "1", 100, 200)
+    print(room)
+
+
+    print("\nTesting getRoomInfo()")
+    info = getRoomInfo("033", "0 0378-00")
     import json
     print(json.dumps(info, indent=4))
