@@ -63,7 +63,7 @@ if __name__ == "__main__":
     print("\n==============================")
     print("Testing getEmployeeInfo()")
     print("==============================")
-    employee = getEmployeeInfo({"Email": "testemployee@calpoly.edu"})
+    employee = getEmployeeInfo({"Email": "ydeniz@calpoly.edu"})
     print(employee)
 
     print("\n==============================")
