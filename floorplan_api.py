@@ -2,9 +2,6 @@ from connector import make_connection
 from permissions import check_permission
 
 def getFloorplans():
-    if not check_permission("getFloorplans"):
-        raise PermissionError("Permission denied")
-
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 

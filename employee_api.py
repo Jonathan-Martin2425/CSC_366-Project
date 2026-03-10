@@ -1,11 +1,9 @@
 from connector import make_connection
 from permissions import check_permission
+from errors_api import *
 
 
 def getEmployees(collegeName, departmentName):
-    if not check_permission("getEmployees"):
-        raise PermissionError("Permission denied")
-
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 
@@ -74,9 +72,6 @@ def getEmployees(collegeName, departmentName):
 
 
 def getEmployeeInfo(employeeIdentifier):
-    if not check_permission("getEmployeeInfo"):
-        raise PermissionError("Permission denied")
-
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 

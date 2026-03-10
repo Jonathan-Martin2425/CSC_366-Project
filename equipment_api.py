@@ -3,9 +3,6 @@ from permissions import check_permission
 
 
 def getEquipmentLocations(equipmentType):
-    if not check_permission("getEquipmentLocations"):
-        raise PermissionError("Permission denied")
-
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 
@@ -41,9 +38,6 @@ def getEquipmentLocations(equipmentType):
 
 
 def getSensitiveEquipmentLocations(collegeAbbrev):
-    if not check_permission("getSensitiveEquipmentLocations"):
-        raise PermissionError("Permission denied")
-
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 

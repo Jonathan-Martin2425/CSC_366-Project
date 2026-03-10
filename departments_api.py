@@ -3,12 +3,7 @@ from permissions import check_permission
 from errors_api import *
 
 
-def getDeptListEnhanced(collegeAbbrev, userId):
-    affiliation = {"department": [dept]}
-
-    if not check_permission("Department View Level", userId, affiliation):
-        return ERR_PERMISSION
-    
+def getDeptListEnhanced(collegeAbbrev): 
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 

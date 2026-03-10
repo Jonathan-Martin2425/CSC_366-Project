@@ -194,10 +194,10 @@ def assignEquipment(userId, building, room, equipType, newCount):
     try:
 
         cursor.execute("""
-        SELECT COUNT(*)
+        SELECT COUNT
         FROM EQUIPtoROOM
-        WHERE EquipType=%s AND BNumber=%s AND RNumber=%s
-        """, (equipType, building, room))
+        WHERE EquipType=%s AND BNumber=%s AND RNumber=%s;
+        """, (equipType, room, building))
 
         before = cursor.fetchone()[0]
 

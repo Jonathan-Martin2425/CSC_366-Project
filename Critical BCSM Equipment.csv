@@ -1,0 +1,70 @@
+BCSM Department,Building Number, Room,Number of Equipment,Critical and/or sensitive equipment or materials requiring attention,On back up power,Short period of time    (1-2 days),Medium period of time (3-5 Days),Long period of time (7+ days),Alternative best action,Contact person,Back up contact
+Biological Sciences,33,258A,3,ULT Freezer,No,1,"1,4,6","1,4,6",,John Merriam,Doug Brewster
+Biological Sciences,33,395,2,ULT Freezer,No,1,"1,4,6","1,4,6",,John Merriam,Doug Brewster
+Biological Sciences,33,151A,1,Walk-in,No,1,1,"1,5",,Mike Jones,Doug Brewster
+Biological Sciences,33,381,1,Hazardous waste,,1,1,"1,3",,John Merriam,Craig Jacobson
+Biological Sciences,33,253A,2,Chest Freezer,No,1,1,"1,5",,Dave Clendenen,John Merriam
+Mathematics,180,613,2,Computer Servers,No,1,1,1,,Dave Camp,Joyce Lin
+Biological Sciences,33,394,1,ULT Freezer,No,1,"1,4,6","1,4,6",,John Merriam,Doug Brewster
+Biological Sciences,33,386,2,CO2 incubator,No,1,"1,4,6","1,4,6",,John Merriam,Craig Jacobson
+Biological Sciences,33,387A,2,CO2 incubator,No,1,"1,4,6","1,4,6",,Mallary Wacker,John Merriam
+Biological Sciences,33,387A,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Mallary Wacker,John Merriam
+Biological Sciences,33,388,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Jason Blank,John Merriam
+Biological Sciences,33,389,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Mike Black,John Merriam
+Biological Sciences,33,390,1,Refrigerator and/or Freezer ,No,1,"1,6","1,6",,John Merriam,Craig Jacobson
+Biological Sciences,33,393,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,John Merriam,Craig Jacobson
+Biological Sciences,33,251,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Emily Taylor,John Merriam
+Biological Sciences,33,391,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Sandy Clement,John Merriam
+Biological Sciences,33,355C,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Larisa Vredevoe,John Merriam
+Biological Sciences,33,459,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Lauren Chan,John Merriam
+Biological Sciences,33,466,1,ULT Freezer,No,1,"1,4,6","1,4,6",,Mark Wacker,John Merriam
+Biological Sciences,33,473,3,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Heather Liwanag,John Merriam
+Biological Sciences,33,387,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Mallary Wacker,John Merriam
+Biological Sciences,33,257D,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Jen Yost,John Merriam
+Biological Sciences,33,471,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Marie Yeung,John Merriam
+Biological Sciences,33,460,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Pat Fidopiastis,John Merriam
+Biological Sciences,33,470,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Marie Yeung,John Merriam
+Biological Sciences,33,472,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Christy Strand,John Merriam
+Biological Sciences,33,468A,1,ULT Freezer,No,1,"1,4,6","1,4,6",,John Merriam,Doug Brewster
+Biological Sciences,33,357A,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Larisa Vredevoe,John Merriam
+Biological Sciences,33,357B,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,John Merriam,Craig Jacobson
+Biological Sciences,53,312,4,Environmental chamber,No,1,"1,2,6","1,2,6",,John Merriam,Doug Brewster
+Biological Sciences,53,305,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Elena Keeling,John Merriam
+Biological Sciences,53,316,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Nikki Adams,John Merriam
+Biological Sciences,53,114,1,Refrigerator and/or Freezer ,No,1,"1,4,6","1,4,6",,Erin Johnson,John Merriam
+Biological Sciences,53,313,1,Refrigerator and/or Freezer ,No,1,"1,6","1,6",,John Merriam,Craig Jacobson
+Biological Sciences,33,356,1,Refrigerator and/or Freezer ,No,1,"1,6","1,6",,John Merriam,Craig Jacobson
+Biological Sciences,180,536,1,ULT Freezer,Yes,1,"1,5","1,5",,Doug Brewster,Kevin Dunham
+Biological Sciences,181,303A,3,ULT Freezer,Yes,1,"1,5","1,5",,Jen Vanderkelen,Doug Brewster
+Biological Sciences,181,303A,3,Refrigerator and/or Freezer ,Yes,1,"1,5","1,5",,Jen Vanderkelen,Doug Brewster
+Biological Sciences,181,450B,3,ULT Freezer,Yes,1,"1,5","1,5",,Nathaniel Martinez,Doug Brewster
+Biological Sciences,181,450B,3,Refrigerator and/or Freezer ,Yes,1,"1,5","1,5",,Nathaniel Martinez,Doug Brewster
+Biological Sciences,181,403A,3,ULT Freezer,Yes,1,"1,5","1,5",,Alexis Pasulka,Sean Lema
+Biological Sciences,181,403A,3,Refrigerator and/or Freezer ,Yes,1,"1,5","1,5",,Alexis Pasulka,Sean Lema
+Biological Sciences,181,403B,2,Refrigerator and/or Freezer ,Yes,1,"1,5","1,5",,Sean Lema,Lars Tomanek
+Biological Sciences,181,403BA,1,Mass Spectrometer,Yes,1,"1,2",2,,Kevin Dunham,Lars Tomanek
+Chemistry/Biochemistry,180,various,1,Hazardous waste,,1,1,3,,Andrea Laubscher,
+Chemistry/Biochemistry,181,various,1,Hazardous waste,,1,1,3,,Andrea Laubscher,
+Chemistry/Biochemistry,180,469,1,ULT Freezer,Yes,1,1,"4, 6",,Tom Featherstone,Andrea Laubscher
+Chemistry/Biochemistry,180,469,1,Refrigerator and/or Freezer ,Yes,1,1,"4, 6",,Tom Featherstone,Andrea Laubscher
+Chemistry/Biochemistry,180,466,1,ULT Freezer,Yes,1,1,"4, 6",Walk-in is not on back up power,Andrea Laubscher,
+Chemistry/Biochemistry,180,466,1,Refrigerator and/or Freezer ,Yes,1,1,"4, 6",Walk-in is not on back up power,Andrea Laubscher,
+Chemistry/Biochemistry,180,465,1,Refrigerator and/or Freezer ,Yes,1,1,"4, 6",,Tom Featherstone,Andrea Laubscher
+Chemistry/Biochemistry,180,463,1,ULT Freezer,No,1,1,"4, 6",,Andrea Laubscher,
+Chemistry/Biochemistry,180,461,1,Refrigerator and/or Freezer ,No,1,1,"4, 6",,Andrea Laubscher,
+Chemistry/Biochemistry,180,464,3,NMR's,No,1,7,7,,Kevin Dunham,
+Kinesiology and Public Health,181,350B,2,ULT Freezer,Yes,1,7,7,,Eric Benson,Casey Heany
+Kinesiology and Public Health,181,350B,2,Refrigerator and/or Freezer ,Yes,1,2,2,,Eric Benson,Casey Heany
+Kinesiology and Public Health,181,351,1,Luminex and other processing equipment,No,1,2,2,,Eric Benson,Casey Heany
+Kinesiology and Public Health,181,351,1,Research computers,No,1,2,2,,Eric Benson,Casey Heany
+Kinesiology and Public Health,43A,251,1,DXA ,No,1,2,2,,Eric Benson,Cory Greever
+Kinesiology and Public Health,43A,various,25,Research computers,No,1,2,2,,Eric Benson,Julia Jones
+Kinesiology and Public Health,52,D8-10,10,Research computers,No,1,2,2,,Eric Benson,Emily Kelly
+Kinesiology and Public Health,83,various,,Research computers,No,1,2,2,,Eric Benson,Casey Heany
+Chemistry/Biochemistry,52,various,,Hazardous waste,,1,1,3,,Andrea Laubscher,
+Chemistry/Biochemistry,180,431,1,Glove Box,No,1,1,"1,5,6",,Tom Featherstone,Celine DiBernardo
+Chemistry/Biochemistry,52,various,,instrumentation and equipment,No,1,1,2,,Tom Featherstone,
+Physics,180,635,,Vacuum pump and laser,No,1,"1,2","1,2",,Kevin Thompson,
+Physics,180,635A,,Vacuum pump and laser,No,1,"1,2","1,2",,Kevin Thompson,
+Biological Sciences,72,101-107,,"Live plant collections, live research projects",No,"2,4",4,4,,Gage Willey,Matt Ritter
+Chemistry/Biochemistry,181,452,1,Glove Box,No,1,1,"1,5,6",,Tom Featherstone,Celine DiBernardo

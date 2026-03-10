@@ -3,9 +3,6 @@ from permissions import check_permission
 
 
 def getRooms(buildingNumber, floorNumber):
-    if not check_permission("getRooms"):
-        raise PermissionError("Permission denied")
-
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 
@@ -45,9 +42,6 @@ def getRooms(buildingNumber, floorNumber):
 
 
 def findRoom(buildingNumber, floorNumber, x, y):
-    if not check_permission("findRoom"):
-        raise PermissionError("Permission denied")
-
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 
@@ -84,9 +78,6 @@ def findRoom(buildingNumber, floorNumber, x, y):
 
 
 def getRoomInfo(buildingNumber, roomNumber):
-    if not check_permission("getRoomInfo"):
-        raise PermissionError("Permission denied")
-
     DB = make_connection("settings.config")
     cursor = DB.cursor(dictionary=True)
 
