@@ -9,7 +9,7 @@ PERMISSION_LEVELS = {
 }
 
 
-def validatePermission(requiredLevel, userId, affiliation):
+def check_permission(requiredLevel, userId, affiliation):
 
     try:
 

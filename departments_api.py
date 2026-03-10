@@ -1,11 +1,14 @@
 from connector import make_connection
 from permissions import check_permission
+from errors_api import *
 
 
-def getDeptListEnhanced(collegeAbbrev):
-    if not check_permission("getDeptListEnhanced"):
-        raise PermissionError("Permission denied")
+def getDeptListEnhanced(collegeAbbrev, userId):
+    affiliation = {"department": [dept]}
 
+    if not check_permission("Department View Level", userId, affiliation):
+        return ERR_PERMISSION
+    
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 

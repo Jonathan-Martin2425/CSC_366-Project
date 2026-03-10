@@ -30,7 +30,7 @@ def addEmployee(userId, first, last, email, dept, title):
 
     affiliation = {"department": [dept]}
 
-    if not validatePermission("Department Update Level", userId, affiliation):
+    if not check_permission("Department Update Level", userId, affiliation):
         DB.close()
         return ERR_PERMISSION
 
@@ -65,7 +65,7 @@ def assignRoom(userId, email, building, room):
 
     affiliation = {"department": [dept]}
 
-    if not validatePermission("Department Update Level", userId, affiliation):
+    if not check_permission("Department Update Level", userId, affiliation):
         return ERR_PERMISSION
 
     DB = make_connection("settings.config")
@@ -102,7 +102,7 @@ def removeRoomAssignment(userId, email, building, room):
 
     affiliation = {"department": [dept]}
 
-    if not validatePermission("Department Update Level", userId, affiliation):
+    if not check_permission("Department Update Level", userId, affiliation):
         return ERR_PERMISSION
 
     DB = make_connection("settings.config")
@@ -134,7 +134,7 @@ def departmentAssignment(userId, dept, building, room):
 
     affiliation = {"department": [dept]}
 
-    if not validatePermission("College Update Level", userId, affiliation):
+    if not check_permission("College Update Level", userId, affiliation):
         return ERR_PERMISSION
 
     DB = make_connection("settings.config")
@@ -185,7 +185,7 @@ def assignEquipment(userId, building, room, equipType, newCount):
 
     affiliation = {"department": [dept]}
 
-    if not validatePermission("Department Update Level", userId, affiliation):
+    if not check_permission("Department Update Level", userId, affiliation):
         return ERR_PERMISSION
 
     DB = make_connection("settings.config")
@@ -247,7 +247,7 @@ def assignEquipment(userId, building, room, equipType, newCount):
     
 def addEquipmentType(userId, name, sensitive):
 
-    if not validatePermission("God Level", userId, {}):
+    if not check_permission("God Level", userId, {}):
         return ERR_PERMISSION
 
     DB = make_connection("settings.config")
