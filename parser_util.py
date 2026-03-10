@@ -45,9 +45,11 @@ def parse_staff(line: str) -> tuple:
 
 
 def parse_room(line: str):
-    split = line.split('-', 1)
-
-    return split
+    split = line.split(' ', 1)
+    if("-0" in split[0]):
+        return (split[0][:len(split[0]) - 2], split[1])
+    else:
+        return split
 
 
 def parse_room_type(line: str):
@@ -72,7 +74,7 @@ def parse_multiple_staff(line: str):
 
 def literal_intstr_to_0intstr(intstr: str):
     if intstr == "43A":
-        return "043"
+        return "043-A"
     if (len(intstr) == 3):
         return intstr
     elif (len(intstr) == 2):
@@ -90,7 +92,7 @@ def reg_room_num_to_table_notation(room_num: str) -> str | list | None:
     if(room_num == "101-107"):
         return [f"10{i}" for i in range(1, 8)]
     if(room_num == "D8-10"):
-        return [f"0 0D{i:02d}-00" for i in range(8, 11)]
+        return [f"0D{i:02d}-00" for i in range(8, 11)]
     # extracts number and potential letter for a room
     match = re.fullmatch(r"(\d{1,3})([A-Za-z]?)([A-Za-z]?)", room_num.strip())
     number, letter1, letter2 = match.groups()
@@ -103,7 +105,7 @@ def reg_room_num_to_table_notation(room_num: str) -> str | list | None:
 
     letter2 = letter2.upper() if letter2 else "0"
 
-    return f"0 0{number_padded}-{letter1}{letter2}"
+    return f"0{number_padded}-{letter1}{letter2}"
 
 def parse_contact(line: str) -> list[str]:
     split = line.split()

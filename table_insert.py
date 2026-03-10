@@ -251,6 +251,10 @@ def insert_equipment(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, f
 
         equipment_name = equipment["Critical and/or sensitive equipment or materials requiring attention"]
 
+        if(equipment_name not in [x[1] for x in equipment_data.values()]):
+            equipment_data[equipment_name] = (i, equipment_name)
+            i += 1
+
         for name in equipment_data.keys():
             if(equipment_data[name][1] == equipment_name):
                 equipment_id = equipment_data[name][0]
@@ -268,7 +272,7 @@ def insert_equipment(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, f
             bemail = bemail.lower()
             for cur_rnum in room_num:
                 if(cur_rnum[0] == "D"):
-                    cur_rnum = f"0 0D{int(cur_rnum[1:]):02d}-00"
+                    cur_rnum = f"0D{int(cur_rnum[1:]):02d}-00"
                 else:
                     continue
                 room_to_equip_data.append((equipment_id, cur_rnum, building_id))
@@ -368,6 +372,8 @@ def insert_equipment(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, f
     statement = "INSERT INTO CONTACTPERSONS (EquipType, RNumber, BNumber, Email, Type) VALUES (%s, %s, %s, %s, 'Backup');"
     cursor.executemany(statement, backup_contact_data)
 
+    DB.commit()
+
 if __name__ == "__main__":
     DB = make_connection("settings.config")
     cursor = DB.cursor()
@@ -382,6 +388,8 @@ if __name__ == "__main__":
     emails = insert_staffAndFaculty(cursor, DB, "Lab Project Data/BCSM Faculty and departments.csv")
     emails.extend([i[0] for i in insert_rooms(cursor, DB, "Lab Project Data/BCSM Rooms.csv", emails)])
     insert_equipment(cursor, DB, "Lab Project Data/Critical BCSM Equipment.csv", emails)
+    # create insert_floorplans
+    # create insert_staffandfaculty updated
 
     # close connections to end program
     cursor.close()
