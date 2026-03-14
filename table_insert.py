@@ -96,30 +96,37 @@ def insert_from_furniture(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstra
     DB.commit()
 
 def insert_staffAndFaculty(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, filename: str):
-    staffCSV = read_csv_with_encoding(filename, has_header=False)
+    staffCSV = read_csv_with_encoding(filename, has_header=True)
     data, nullData, emails, i = [], [], [], 1
     for staff in staffCSV:
-        staff = staff[0]
-        staffTuple = parser_util.parse_staff(staff)
-        email = (staffTuple[0][0] + staffTuple[1] + "@calpoly.edu").lower()
-        while any(email == row[0] for row in data) or any(email == row[0] for row in nullData):
-            atIndex = email.index('@')
-            email = email[:atIndex] + str(i) + email[atIndex:]
-            i += 1
-        if staffTuple[2] not in deptAbbrivationDict:
-            nullData.append((email, staffTuple[1], staffTuple[0]))
-        else:
-            deptID = deptAbbrivationDict[staffTuple[2]]
-            data.append((email, staffTuple[1], staffTuple[0], deptID))
-        emails.append(email)
-    cursor.executemany("INSERT INTO STAFFandFACULTY (Email, FirstName, LastName, Title, DeptID) VALUES (%s, %s, %s, NULL, %s);", data)
-    cursor.executemany("INSERT INTO STAFFandFACULTY (Email, FirstName, LastName, Title, DeptID) VALUES (%s, %s, %s, NULL, NULL);", nullData)
+        email = staff["Email Address"]
+        deptID = staff["Deptid Code"]
+        firstName = staff["Preferred First Name"]
+        lastName = staff["Preferred Last Name"]
+        emplType = staff["Empl Type Descr"]
+        if (staff["College Name"] == "College of Science and Mathematics") and not (any(row[0] == email for row in data)):
+            data.append((email, firstName, lastName, emplType, deptID))
+            emails.append(email)
+
+    """
+        statement = "SELECT * FROM DEPARTMENTS WHERE DId = %s"
+        for staff in data:
+            deptID = staff[4]
+    
+            cursor.execute(statement, [deptID])
+    
+            res = cursor.fetchall()
+            if(len(res) == 0):
+                print(staff)
+    """
+
+    cursor.executemany("INSERT INTO STAFFandFACULTY (Email, FirstName, LastName, Title, DeptID) VALUES (%s, %s, %s, %s, %s);", data)
     DB.commit()
     return emails
 
-def insert_rooms(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, filename: str, emails: list):
+def insert_rooms(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, filename: str):
     roomsCSV = read_csv_with_encoding(filename, has_header=True)
-    building_data, floor_data, room_data, room_occupants_data, room_image_data, emails_not_in_staff = {}, [], {}, [], [], []
+    building_data, floor_data, room_data, room_occupants_data, room_image_data, emails_not_in_staff, nullStaff = {}, [], {}, [], [], [], []
 
     for room in roomsCSV:
         room_split = parser_util.parse_room(room["Building & Room ID"])
@@ -139,12 +146,25 @@ def insert_rooms(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, filen
         if occupants_str != "":
             occupants = parser_util.parse_multiple_staff(occupants_str)
             for staffTuple in occupants:
-                email = (staffTuple[0][0]+staffTuple[1]+"@calpoly.edu").lower()
-                if email not in emails and not any(email == s[0] for s in emails_not_in_staff):
-                    deptID = deptAbbrivationDict.get(staffTuple[2], None)
-                    if deptID is None or deptID == "":
-                        continue
-                    emails_not_in_staff.append((email, staffTuple[1], staffTuple[0], deptID))
+                lastName = staffTuple[0]
+                firstName = staffTuple[1]
+
+                statement = "SELECT Email FROM STAFFandFACULTY WHERE FirstName = %s AND LastName = %s;"
+                cursor.execute(statement, (firstName, lastName))
+
+                emails = cursor.fetchall()
+                if len(emails) != 1:
+                    email = firstName[0] + lastName + "47@calpoly.edu"
+                    email = email.lower()
+                    deptID = deptAbbrivationDict[staffTuple[2]]
+
+                    if not any(row[0] == email for row in emails_not_in_staff + nullStaff):
+                        if(deptID == ""):
+                            nullStaff.append((email, firstName, lastName))
+                        else:
+                            emails_not_in_staff.append((email, firstName, lastName, deptID))
+                else:
+                    email = emails[0][0]
                 if (email, building_id, room_number) not in room_occupants_data:
                     room_occupants_data.append((email, building_id, room_number))
         for i in range(1, 5):
@@ -155,14 +175,38 @@ def insert_rooms(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, filen
     cursor.executemany("INSERT INTO BUILDINGS (BNumber, BName, BFloorCount) VALUES (%s, %s, %s);", list(building_data.values()))
     cursor.executemany("INSERT INTO FLOORS (BNumber, FNumber) VALUES (%s, %s);", floor_data)
     cursor.executemany("INSERT INTO ROOMS (BNumber, RNumber, SqFt, BoxCoordinates, HasBackup, FNumber, FBNumber, RoomType, RoomSpace) VALUES (%s, %s, %s, NULL, 0, %s, %s, %s, %s);", list(room_data.values()))
+    for staff in emails_not_in_staff:
+        deptID = staff[3]
+
+        statement = "SELECT * FROM DEPARTMENTS WHERE DId = %s;"
+        cursor.execute(statement, [deptID])
+
+        res = cursor.fetchall()
+
+        if(len(res) != 1):
+            print(staff)
     cursor.executemany("INSERT INTO STAFFandFACULTY (Email, FirstName, LastName, Title, DeptID) VALUES (%s, %s, %s, NULL, %s);", emails_not_in_staff)
+    cursor.executemany("INSERT INTO STAFFandFACULTY (Email, FirstName, LastName, Title, DeptID) VALUES (%s, %s, %s, NULL, NULL);", nullStaff)
+    for staff in room_occupants_data:
+        email = staff[0]
+
+        statement = "SELECT Email FROM STAFFandFACULTY WHERE Email = %s;"
+        cursor.execute(statement, [email])
+
+        emails = cursor.fetchall()
+
+        if(len(emails) != 1):
+            print(email)
+            print(emails)
+
     cursor.executemany("INSERT INTO ROOMOCCUPANTS (Email, BNumber, RNumber, DateAssigned) VALUES (%s, %s, %s, NOW());", room_occupants_data)
     cursor.executemany("INSERT INTO ROOMIMAGES (RImagePath, RNumber, BNumber) VALUES (%s, %s, %s);", room_image_data)
     DB.commit()
-    return emails_not_in_staff
+
+    print(emails_not_in_staff)
 
 # wip
-def insert_equipment(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, filename: str, emails: list):
+def insert_equipment(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, filename: str):
     equipmentCSV = parser_util.parse_csv(filename)
 
 
@@ -233,25 +277,37 @@ def insert_equipment(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, f
 
         primary_contact = equipment["Contact person"]
         if(primary_contact != ""):
-            staffTuple = parser_util.parse_contact(primary_contact)
-            email: str = staffTuple[0][0] + staffTuple[1] + "@calpoly.edu"
-            email = email.lower()
+            firstName, lastName = parser_util.parse_contact(primary_contact)
 
-            if email not in emails and not any(i[0] == email for i in emails_not_in_staff):
-                staffTuple = (email, staffTuple[0], staffTuple[1])
-                emails_not_in_staff.append(staffTuple)
+            statement = "SELECT Email FROM STAFFandFACULTY WHERE FirstName = %s AND LastName = %s;"
+            cursor.execute(statement, (firstName, lastName))
+
+            emails = cursor.fetchall()
+            if len(emails) != 1:
+                email = firstName[0] + lastName + "47@calpoly.edu"
+                email = email.lower()
+                if not any(row[0] == email for row in emails_not_in_staff):
+                    emails_not_in_staff.append((email, firstName, lastName))
+            else:
+                email = emails[0][0]
 
             primary_contact_data.append((equipment_id, room_num, building_id, email))
 
         backup_contact = equipment["Contact person"]
         if (backup_contact != ""):
-            staffTuple = parser_util.parse_contact(backup_contact)
-            email: str = staffTuple[0][0] + staffTuple[1] + "@calpoly.edu"
-            email = email.lower()
+            firstName, lastName = parser_util.parse_contact(primary_contact)
 
-            if email not in emails and not any(i[0] == email for i in emails_not_in_staff):
-                staffTuple = (email, staffTuple[0], staffTuple[1])
-                emails_not_in_staff.append(staffTuple)
+            statement = "SELECT Email FROM STAFFandFACULTY WHERE FirstName = %s AND LastName = %s;"
+            cursor.execute(statement, (firstName, lastName))
+
+            emails = cursor.fetchall()
+            if len(emails) != 1:
+                email = firstName[0] + lastName + "47@calpoly.edu"
+                email = email.lower()
+                if not any(row[0] == email for row in emails_not_in_staff):
+                    emails_not_in_staff.append((email, firstName, lastName))
+            else:
+                email = emails[0][0]
 
             backup_contact_data.append((equipment_id, room_num, building_id, email))
 
@@ -362,11 +418,10 @@ if __name__ == "__main__":
     insert_RoomUseCodes(cursor, DB, "Lab Project Data/Room use codes.csv")
     insert_RoomSpaceCategories(cursor, DB, "Lab Project Data/Space Catagories.csv")
     insert_from_furniture(cursor, DB, "Lab Project Data/Furniture type.csv")
-    emails = insert_staffAndFaculty(cursor, DB, "Lab Project Data/BCSM Faculty and departments.csv")
-    emails.extend([i[0] for i in insert_rooms(cursor, DB, "Lab Project Data/BCSM Rooms.csv", emails)])
-    insert_equipment(cursor, DB, "Lab Project Data/Critical BCSM Equipment.csv", emails)
+    insert_staffAndFaculty(cursor, DB, "Lab Project Data/Current Employees 20251031.csv")
+    insert_rooms(cursor, DB, "Lab Project Data/BCSM Rooms.csv")
+    insert_equipment(cursor, DB, "Lab Project Data/Critical BCSM Equipment.csv")
     insert_floorplans(cursor, DB, "Lab Project Data/Floorplans.csv")
-    # create insert_staffandfaculty updated
 
     # Add default users
     users_to_add = [
@@ -374,7 +429,7 @@ if __name__ == "__main__":
         {"Email": "lowpriv@calpoly.edu", "FirstName": "Low", "LastName": "Privilege", "URole": "User", "UPassword": "lowpass"}
     ]
     for user in users_to_add:
-        cursor.execute("SELECT COUNT(*) FROM USERS WHERE Email = %s", (user["Email"],))
+        cursor.execute("SELECT COUNT(*) FROM USERS WHERE Email = %s;", (user["Email"],))
         exists = cursor.fetchone()[0]
         if exists == 0:
             cursor.execute("INSERT INTO USERS (Email, FirstName, LastName, URole, UPassword) VALUES (%s, %s, %s, %s, %s);",
