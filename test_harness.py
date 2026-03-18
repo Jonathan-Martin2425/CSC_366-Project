@@ -6,20 +6,49 @@ from floorplan_api import getFloorplans
 from room_api import getRooms, findRoom, getRoomInfo
 from dataManipulation_api import *
 
-def ensure_test_user(cursor, email, role):
-    """Create user if missing, but do not touch permissions."""
+def ensure_test_user(cursor, email, permission, dept=None, college=None):
     cursor.execute("SELECT Email FROM USERS WHERE Email=%s", (email,))
+    
     if cursor.fetchone() is None:
-        cursor.execute("INSERT INTO USERS (Email, URole) VALUES (%s,%s)", (email, role))
+        cursor.execute("""
+            INSERT INTO USERS (Email, UPermissionLevel, DeptID, CollegeID)
+            VALUES (%s, %s, %s, %s)
+        """, (email, permission, dept, college))
 
 def setup_users():
     DB = make_connection("settings.config")
     cursor = DB.cursor()
+
     try:
-        ensure_test_user(cursor, "admin@calpoly.edu", "God Level")
-        ensure_test_user(cursor, "lowpriv@calpoly.edu", "Department View Level")
-        ensure_test_user(cursor, "testemployee@calpoly.edu", "Department Update Level")
+        # Admin (no restriction needed)
+        ensure_test_user(
+            cursor,
+            "admin@calpoly.edu",
+            "God Level",
+            "109400",
+            "BCSM"
+        )
+
+        # Department-level user
+        ensure_test_user(
+            cursor,
+            "testemployee@calpoly.edu",
+            "Department Update Level",
+            "109400",        # must exist in DEPARTMENTS
+            "BCSM"
+        )
+
+        # Low privilege user
+        ensure_test_user(
+            cursor,
+            "lowpriv@calpoly.edu",
+            "Department View Level",
+            "109400",
+            "BCSM"
+        )
+
         DB.commit()
+
     finally:
         DB.close()
 
@@ -104,25 +133,25 @@ if __name__ == "__main__":
     print("\n==============================")
     print("Testing assignRoom()")
     print("==============================")
-    result = assignRoom("admin@calpoly.edu", "testemployee@calpoly.edu", "033", "101")
+    result = assignRoom("admin@calpoly.edu", "testemployee@calpoly.edu", "033", "0252-00")
     print("Result:", ERROR_MESSAGES[result])
 
     print("\n==============================")
     print("Testing removeRoomAssignment()")
     print("==============================")
-    result = removeRoomAssignment("admin@calpoly.edu", "testemployee@calpoly.edu", "033", "101")
+    result = removeRoomAssignment("admin@calpoly.edu", "testemployee@calpoly.edu", "033", "0252-00")
     print("Result:", ERROR_MESSAGES[result])
 
     print("\n==============================")
     print("Testing assignEquipment()")
     print("==============================")
-    result = assignEquipment("admin@calpoly.edu", "033", "101", "Bed", 5)
+    result = assignEquipment("admin@calpoly.edu", "033", "0252-00", "Bed", 5)
     print("Result:", ERROR_MESSAGES[result])
 
     print("\n==============================")
     print("Testing departmentAssignment()")
     print("==============================")
-    result = departmentAssignment("admin@calpoly.edu", "105-0002310", "033", "101")
+    result = departmentAssignment("admin@calpoly.edu", "105-0002310", "033", "0252-00")
     print("Result:", ERROR_MESSAGES[result])
 
     print("\n==============================")
@@ -134,7 +163,7 @@ if __name__ == "__main__":
     print("\n==============================")
     print("Testing Permission Denial (lowpriv)")
     print("==============================")
-    result = assignEquipment("lowpriv@calpoly.edu", "033", "101", "Bed", 3)
+    result = assignEquipment("lowpriv@calpoly.edu", "033", "0252-00", "Bed", 3)
     print("Result:", ERROR_MESSAGES[result])
 
     # --- WAL Results ---

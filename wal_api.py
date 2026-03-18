@@ -9,6 +9,12 @@ def _write_log(action, userId, building=None, room=None, email=None, equipID=Non
         DB = make_connection("settings.config")
         cursor = DB.cursor()
 
+        # 🔥 FIX: replace None with dummy values
+        if building is None:
+            building = "N/A"
+        if room is None:
+            room = "N/A"
+
         query = """
         INSERT INTO LOGRECORDS
         (RTime, RType, RUser, BNumber, RNumber, Email, EquipID, RAction)
@@ -31,7 +37,8 @@ def _write_log(action, userId, building=None, room=None, email=None, equipID=Non
 
         return SUCCESS
 
-    except Exception:
+    except Exception as e:
+        print("LOG ERROR:", e)
         return ERR_LOGGING
     
     

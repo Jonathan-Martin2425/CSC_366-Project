@@ -9,58 +9,62 @@ PERMISSION_LEVELS = {
 }
 
 
-def check_permission(requiredLevel, userId, affiliation):
+def check_permission(requiredLevel, userId, affiliation=None):
 
     try:
-
         DB = make_connection("settings.config")
         cursor = DB.cursor()
 
         query = """
-        SELECT USERS.URole, STAFFandFACULTY.DeptID, DEPARTMENTS.College
+        SELECT UPermissionLevel, DeptID, CollegeID
         FROM USERS
-        JOIN STAFFandFACULTY
-            ON USERS.Email = STAFFandFACULTY.Email
-        JOIN DEPARTMENTS
-            ON STAFFandFACULTY.DeptID = DEPARTMENTS.DId
-        WHERE USERS.Email = %s
+        WHERE Email = %s
         """
 
         cursor.execute(query, (userId,))
         result = cursor.fetchone()
-
         DB.close()
 
         if result is None:
             return False
 
-        userRole, userDept, userCollege = result
+        userPermissionLevel, userDept, userCollege = result
 
-        # Check permission level
-        if PERMISSION_LEVELS[userRole] < PERMISSION_LEVELS[requiredLevel]:
+        if userPermissionLevel not in PERMISSION_LEVELS:
             return False
 
-        # If no affiliation check needed
+        userLevel = PERMISSION_LEVELS[userPermissionLevel]
+        requiredLevelVal = PERMISSION_LEVELS[requiredLevel]
+
+        # Admin override
+        if userPermissionLevel == "God Level":
+            return True
+
+        if userLevel < requiredLevelVal:
+            return False
+
+        if userLevel > requiredLevelVal:
+            return True
+
         if not affiliation:
             return True
 
-        # College check
-        if "college" in affiliation:
-            if affiliation["college"] != userCollege:
-                return False
-
         # Department check
         if "department" in affiliation:
-
             allowed = affiliation["department"]
-
             if isinstance(allowed, str):
                 allowed = [allowed]
 
             if userDept not in allowed:
                 return False
 
+        # College check
+        if "college" in affiliation:
+            if userCollege != affiliation["college"]:
+                return False
+
         return True
 
-    except Exception:
+    except Exception as e:
+        print("Permission check error:", e)
         return False

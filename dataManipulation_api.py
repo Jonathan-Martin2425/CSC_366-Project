@@ -4,25 +4,36 @@ from wal_api import *
 from permissions import *
 import datetime
 
-def getRoomDepartment(building, room):
+
+# ----------------------------------------
+# Get department + college of a room
+# ----------------------------------------
+def getRoomAffiliation(building, room):
 
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 
     cursor.execute("""
-    SELECT DeptID
-    FROM DEPTOCCUPANT
-    WHERE BNumber=%s AND RNumber=%s
+    SELECT D.DId, D.College
+    FROM DEPTOCCUPANT DO
+    JOIN DEPARTMENTS D ON DO.DeptID = D.DId
+    WHERE DO.BNumber=%s AND DO.RNumber=%s
     """, (building, room))
 
     result = cursor.fetchone()
     DB.close()
 
     if result:
-        return result[0]
+        dept, college = result
+        return {
+            "department": [dept],
+            "college": college
+        }
 
     return None
 
+
+# ----------------------------------------
 def addEmployee(userId, first, last, email, dept, title):
 
     DB = make_connection("settings.config")
@@ -52,18 +63,19 @@ def addEmployee(userId, first, last, email, dept, title):
 
         return SUCCESS
 
-    except Exception:
+    except Exception as e:
+        print("addEmployee error:", e)
         DB.close()
         return ERR_DUPLICATE
-    
+
+
+# ----------------------------------------
 def assignRoom(userId, email, building, room):
 
-    dept = getRoomDepartment(building, room)
+    affiliation = getRoomAffiliation(building, room)
 
-    if dept is None:
+    if affiliation is None:
         return ERR_NOT_FOUND
-
-    affiliation = {"department": [dept]}
 
     if not check_permission("Department Update Level", userId, affiliation):
         return ERR_PERMISSION
@@ -89,18 +101,19 @@ def assignRoom(userId, email, building, room):
 
         return SUCCESS
 
-    except Exception:
+    except Exception as e:
+        print("assignRoom error:", e)
         DB.close()
         return ERR_DUPLICATE
-    
+
+
+# ----------------------------------------
 def removeRoomAssignment(userId, email, building, room):
 
-    dept = getRoomDepartment(building, room)
+    affiliation = getRoomAffiliation(building, room)
 
-    if dept is None:
+    if affiliation is None:
         return ERR_NOT_FOUND
-
-    affiliation = {"department": [dept]}
 
     if not check_permission("Department Update Level", userId, affiliation):
         return ERR_PERMISSION
@@ -126,21 +139,39 @@ def removeRoomAssignment(userId, email, building, room):
 
         return SUCCESS
 
-    except Exception:
+    except Exception as e:
+        print("removeRoomAssignment error:", e)
         DB.close()
         return ERR_UNKNOWN
-    
+
+
+# ----------------------------------------
 def departmentAssignment(userId, dept, building, room):
-
-    affiliation = {"department": [dept]}
-
-    if not check_permission("College Update Level", userId, affiliation):
-        return ERR_PERMISSION
 
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 
     try:
+        # Get college of department
+        cursor.execute("""
+        SELECT College FROM DEPARTMENTS WHERE DId=%s
+        """, (dept,))
+        result = cursor.fetchone()
+
+        if not result:
+            DB.close()
+            return ERR_NOT_FOUND
+
+        college = result[0]
+
+        affiliation = {
+            "department": [dept],
+            "college": college
+        }
+
+        if not check_permission("College Update Level", userId, affiliation):
+            DB.close()
+            return ERR_PERMISSION
 
         cursor.execute("""
         SELECT DeptID
@@ -172,18 +203,19 @@ def departmentAssignment(userId, dept, building, room):
 
         return SUCCESS
 
-    except Exception:
+    except Exception as e:
+        print("departmentAssignment error:", e)
         DB.close()
         return ERR_UNKNOWN
-    
+
+
+# ----------------------------------------
 def assignEquipment(userId, building, room, equipType, newCount):
 
-    dept = getRoomDepartment(building, room)
+    affiliation = getRoomAffiliation(building, room)
 
-    if dept is None:
+    if affiliation is None:
         return ERR_NOT_FOUND
-
-    affiliation = {"department": [dept]}
 
     if not check_permission("Department Update Level", userId, affiliation):
         return ERR_PERMISSION
@@ -194,10 +226,10 @@ def assignEquipment(userId, building, room, equipType, newCount):
     try:
 
         cursor.execute("""
-        SELECT COUNT
+        SELECT COUNT(*)
         FROM EQUIPtoROOM
-        WHERE EquipType=%s AND BNumber=%s AND RNumber=%s;
-        """, (equipType, room, building))
+        WHERE EquipType=%s AND BNumber=%s AND RNumber=%s
+        """, (equipType, building, room))
 
         before = cursor.fetchone()[0]
 
@@ -241,10 +273,13 @@ def assignEquipment(userId, building, room, equipType, newCount):
 
         return SUCCESS
 
-    except Exception:
+    except Exception as e:
+        print("assignEquipment error:", e)
         DB.close()
         return ERR_UNKNOWN
-    
+
+
+# ----------------------------------------
 def addEquipmentType(userId, name, sensitive):
 
     if not check_permission("God Level", userId, {}):
@@ -256,16 +291,20 @@ def addEquipmentType(userId, name, sensitive):
     try:
 
         cursor.execute("""
-        INSERT INTO EQUIPMENT (EquipName,isSensitive)
-        VALUES (%s,%s)
-        """, (name, sensitive))
+INSERT INTO EQUIPMENT (TypeId, EquipName, isSensitive)
+VALUES (
+    (SELECT IFNULL(MAX(TypeId), 0) + 1 FROM EQUIPMENT),
+    %s,
+    %s
+)
+""", (name, sensitive))
 
         DB.commit()
         DB.close()
 
         return SUCCESS
 
-    except Exception:
+    except Exception as e:
+        print("addEquipmentType error:", e)
         DB.close()
         return ERR_DUPLICATE
-    
