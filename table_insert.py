@@ -46,6 +46,7 @@ deptAbbrivationDict = {
     "AFD-Audit": "",
     "CENG-CSC": "",
     "CENG-BMED": "",
+    "Campus Health & Wellbeing": "",
 }
 
 deptNameDict = {
@@ -126,7 +127,7 @@ def insert_staffAndFaculty(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstr
 
 def insert_rooms(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, filename: str):
     roomsCSV = read_csv_with_encoding(filename, has_header=True)
-    building_data, floor_data, room_data, room_occupants_data, room_image_data, emails_not_in_staff, nullStaff = {}, [], {}, [], [], [], []
+    building_data, floor_data, room_data, room_occupants_data, room_image_data, emails_not_in_staff, nullStaff, dept_data = {}, [], {}, [], [], [], [], {}
 
     for room in roomsCSV:
         room_split = parser_util.parse_room(room["Building & Room ID"])
@@ -148,6 +149,10 @@ def insert_rooms(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, filen
             for staffTuple in occupants:
                 lastName = staffTuple[0]
                 firstName = staffTuple[1]
+                if(staffTuple[2] == ""):
+                    deptID = ""
+                else:
+                    deptID = deptAbbrivationDict[staffTuple[2]]
 
                 statement = "SELECT Email FROM STAFFandFACULTY WHERE FirstName = %s AND LastName = %s;"
                 cursor.execute(statement, (firstName, lastName))
@@ -156,7 +161,6 @@ def insert_rooms(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, filen
                 if len(emails) != 1:
                     email = firstName[0] + lastName + "47@calpoly.edu"
                     email = email.lower()
-                    deptID = deptAbbrivationDict[staffTuple[2]]
 
                     if not any(row[0] == email for row in emails_not_in_staff + nullStaff):
                         if(deptID == ""):
@@ -167,6 +171,14 @@ def insert_rooms(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, filen
                     email = emails[0][0]
                 if (email, building_id, room_number) not in room_occupants_data:
                     room_occupants_data.append((email, building_id, room_number))
+                if (deptID != ""):
+                    if (deptID, building_id, room_number) not in dept_data.keys():
+                        dept_data[(deptID, building_id, room_number)] = (deptID, building_id, room_number, 0)
+                    cur_dept_quantity = dept_data[(deptID, building_id, room_number)][3]
+                    dept_data[(deptID, building_id, room_number)] = (
+                        deptID, building_id, room_number, cur_dept_quantity + 1)
+
+
         for i in range(1, 5):
             room_image = room.get(f"Room Photo{i}", "")
             if room_image != "":
@@ -200,10 +212,9 @@ def insert_rooms(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, filen
             print(emails)
 
     cursor.executemany("INSERT INTO ROOMOCCUPANTS (Email, BNumber, RNumber, DateAssigned) VALUES (%s, %s, %s, NOW());", room_occupants_data)
+    cursor.executemany("INSERT INTO DEPTOCCUPANT (DeptID, BNumber, RNumber, Quantity, DateAssigned) VALUES (%s, %s, %s, %s, NOW());", list(dept_data.values()))
     cursor.executemany("INSERT INTO ROOMIMAGES (RImagePath, RNumber, BNumber) VALUES (%s, %s, %s);", room_image_data)
     DB.commit()
-
-    print(emails_not_in_staff)
 
 # wip
 def insert_equipment(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, filename: str):
