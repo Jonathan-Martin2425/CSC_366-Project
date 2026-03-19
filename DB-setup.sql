@@ -174,6 +174,7 @@ EquipType INT,
 RNumber VARCHAR(100),
 BNumber VARCHAR(100),
 DateAssigned TIMESTAMP,
+Quantity INT DEFAULT 1,
 Comments VARCHAR(200),
 CONSTRAINT FK_EquipTypeRooms
     FOREIGN KEY (EquipType)
