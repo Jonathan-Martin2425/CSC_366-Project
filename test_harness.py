@@ -55,7 +55,7 @@ def setup_users():
 
 if __name__ == "__main__":
     # ensure users exist
-    setup_users()
+    #setup_users()
 
     print("\n==============================")
     print("Testing getFloorplans()")
@@ -64,25 +64,25 @@ if __name__ == "__main__":
     print(json.dumps(plans, indent=4))
 
     print("\n==============================")
-    print("Testing getRooms()")
+    print("Testing getRooms(buildingNumber: 033, floorNumber: 1)")
     print("==============================")
     rooms = getRooms("033", "1")
     print(json.dumps(rooms, indent=4))
 
     print("\n==============================")
-    print("Testing findRoom()")
+    print("Testing findRoom(buildingNumber: 033, floorNumber: 1, x: 301, y: 899)")
     print("==============================")
     room = findRoom("033", "1", 301, 899)
     print(json.dumps(room, indent=4))
 
     print("\n==============================")
-    print("Testing getRoomInfo()")
+    print("Testing getRoomInfo(buildingNumber: 033, roomNumber: 0387-00)")
     print("==============================")
     info = getRoomInfo("033", "0387-00")
     print(json.dumps(info, indent=4))
 
     print("\n==============================")
-    print("Testing getDeptList()")
+    print("Testing getDeptList(college: BCSM)")
     print("==============================")
     depts = getDeptList("BCSM")
     print(json.dumps(depts, indent=4))
@@ -91,14 +91,13 @@ if __name__ == "__main__":
     print("Testing getEmployees()")
     print("==============================")
     employees = getEmployees("BCSM", "Statistics")
-    for emp in employees:
-        print(emp)
+    print(json.dumps(employees, indent=4))
 
     print("\n==============================")
     print("Testing getEmployeeInfo()")
     print("==============================")
-    employee = getEmployeeInfo({"Email": "ydeniz@calpoly.edu"})
-    print(employee)
+    employee = getEmployeeInfo({"Email": "atheobol@calpoly.edu"})
+    print(json.dumps(employee, indent=4))
 
     print("\n==============================")
     print("Testing getEquipmentLocations()")
@@ -115,7 +114,7 @@ if __name__ == "__main__":
         print(room)
 
     print("\n==============================")
-    print("Testing getDeptListEnhanced()")
+    print("Testing getDeptListEnhanced(college: BCSM)")
     print("==============================")
     depts = getDeptListEnhanced("BCSM")
     print(json.dumps(depts, indent=4))
