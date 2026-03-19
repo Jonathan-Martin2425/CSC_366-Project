@@ -1,173 +1,168 @@
 from connector import make_connection
 from permissions import check_permission
 from errors_api import *
+import json
 
-
-def getEmployees(collegeName, departmentName):
-    DB = make_connection("settings.config")
-    cursor = DB.cursor()
-
-    query = """
+def computeEmployeeRooms(cursor, email):
+    rooms_query = """
         SELECT
-            SF.FirstName,
-            SF.LastName,
-            SF.Title,
-            SF.Email,
-            RO.BNumber,
-            RO.RNumber,
-            RM.SqFt,
-            occ.OccupantCount
-        FROM DEPARTMENTS D
-        JOIN STAFFandFACULTY SF
-            ON SF.DeptID = D.DId
-        LEFT JOIN ROOMOCCUPANTS RO
-            ON SF.Email = RO.Email
-        LEFT JOIN ROOMS RM
-            ON RO.BNumber = RM.BNumber
-            AND RO.RNumber = RM.RNumber
-        LEFT JOIN (
-            SELECT BNumber, RNumber, COUNT(*) AS OccupantCount
-            FROM ROOMOCCUPANTS
-            GROUP BY BNumber, RNumber
-        ) occ
-            ON RO.BNumber = occ.BNumber
-            AND RO.RNumber = occ.RNumber
-        WHERE D.DName = %s
-        AND D.College = %s
-        ORDER BY SF.LastName, SF.FirstName
+            ROOMS.BNumber,
+            ROOMS.RNumber,
+            ROOMS.SqFt,
+            ROOMTYPE.TypeName
+        FROM ROOMOCCUPANTS
+        JOIN ROOMS
+            ON ROOMOCCUPANTS.BNumber = ROOMS.BNumber
+            AND ROOMOCCUPANTS.RNumber = ROOMS.RNumber
+        JOIN ROOMTYPE
+            ON ROOMS.RoomType = ROOMTYPE.TypeId
+        WHERE ROOMOCCUPANTS.Email = %s
     """
 
-    cursor.execute(query, (departmentName, collegeName))
-    results = cursor.fetchall()
+    cursor.execute(rooms_query, (email,))
+    rooms = cursor.fetchall()
 
-    employees = {}
+    total_sqft = 0.0
+    room_list = []
+    for room in rooms:
+        occupant_count_query = """
+            SELECT COUNT(*) AS OccupantCount
+            FROM ROOMOCCUPANTS
+            WHERE BNumber = %s
+            AND RNumber = %s
+        """
 
-    for fname, lname, title, email, bnum, rnum, sqft, occ_count in results:
+        cursor.execute(occupant_count_query, (room["BNumber"], room["RNumber"]))
+        count_result = cursor.fetchone()
+        occupant_count = count_result["OccupantCount"]
 
-        if email not in employees:
-            employees[email] = {
-                "FullName": f"{fname} {lname}",
-                "Title": title,
-                "Email": email,
-                "Rooms": [],
-                "TotalSpace": 0
-            }
+        sqft_share = float(room["SqFt"]) / occupant_count
+        total_sqft += sqft_share
 
-        if bnum and rnum:
-            employees[email]["Rooms"].append({
-                "BuildingNumber": bnum,
-                "RoomNumber": rnum
-            })
+        room_list.append({
+            "BuildingNumber": room["BNumber"],
+            "RoomNumber": room["RNumber"],
+            "RoomType": room["TypeName"],
+            "SqFt": float(room["SqFt"]),
+            "AssignedSqFt": round(sqft_share, 2)
+        })
 
-            if sqft and occ_count:
-                if occ_count == 1:
-                    employees[email]["TotalSpace"] += float(sqft)
-                else:
-                    employees[email]["TotalSpace"] += float(sqft) / occ_count
+    return room_list, round(total_sqft, 2)
+
+
+def getEmployees(college, department):
+    DB = make_connection("settings.config")
+    cursor = DB.cursor(dictionary=True, buffered=True)
+
+    employee_query = """
+        SELECT
+            STAFFandFACULTY.Email,
+            STAFFandFACULTY.FirstName,
+            STAFFandFACULTY.LastName,
+            STAFFandFACULTY.Title
+        FROM COLLEGES
+        JOIN DEPARTMENTS
+            ON COLLEGES.Abbreviation = DEPARTMENTS.College
+        JOIN STAFFandFACULTY
+            ON DEPARTMENTS.DId = STAFFandFACULTY.DeptID
+        WHERE (COLLEGES.CName = %s OR COLLEGES.Abbreviation = %s)
+        AND DEPARTMENTS.DName = %s
+    """
+
+    cursor.execute(employee_query, (college, college, department))
+    employees = cursor.fetchall()
+
+    result = []
+    for employee in employees:
+        room_list, total_sqft = computeEmployeeRooms(cursor, employee["Email"])
+
+        result.append({
+            "FullName": f"{employee['FirstName']} {employee['LastName']}",
+            "Title": employee["Title"],
+            "Email": employee["Email"],
+            "Rooms": [{"BuildingNumber": r["BuildingNumber"], "RoomNumber": r["RoomNumber"]} for r in room_list],
+            "TotalSqFt": total_sqft
+        })
 
     cursor.close()
     DB.close()
+    return result
 
-    return list(employees.values())
 
-
-def getEmployeeInfo(employeeIdentifier):
+def getEmployeeInfo(identifier):
     DB = make_connection("settings.config")
-    cursor = DB.cursor()
+    cursor = DB.cursor(dictionary=True, buffered=True)
 
-    if "Email" in employeeIdentifier:
-        filter_clause = "SF.Email = %s"
-        params = (employeeIdentifier["Email"],)
+    if "Email" in identifier:
+        employee_query = """
+            SELECT
+                STAFFandFACULTY.Email,
+                STAFFandFACULTY.FirstName,
+                STAFFandFACULTY.LastName,
+                STAFFandFACULTY.Title,
+                DEPARTMENTS.DName
+            FROM STAFFandFACULTY
+            JOIN DEPARTMENTS
+                ON STAFFandFACULTY.DeptID = DEPARTMENTS.DId
+            WHERE STAFFandFACULTY.Email = %s
+        """
 
-    elif "Name" in employeeIdentifier and "Department" in employeeIdentifier:
-        filter_clause = "CONCAT(SF.FirstName, ' ', SF.LastName) = %s AND D.DName = %s"
-        params = (employeeIdentifier["Name"], employeeIdentifier["Department"])
+        cursor.execute(employee_query, (identifier["Email"],))
+
+    elif "FirstName" in identifier and "LastName" in identifier and "Department" in identifier:
+        employee_query = """
+            SELECT
+                STAFFandFACULTY.Email,
+                STAFFandFACULTY.FirstName,
+                STAFFandFACULTY.LastName,
+                STAFFandFACULTY.Title,
+                DEPARTMENTS.DName
+            FROM STAFFandFACULTY
+            JOIN DEPARTMENTS
+                ON STAFFandFACULTY.DeptID = DEPARTMENTS.DId
+            WHERE STAFFandFACULTY.FirstName = %s
+            AND STAFFandFACULTY.LastName = %s
+            AND DEPARTMENTS.DName = %s
+        """
+
+        cursor.execute(employee_query, (
+            identifier["FirstName"],
+            identifier["LastName"],
+            identifier["Department"]
+        ))
 
     else:
-        raise ValueError("Provide either Email or Name + Department")
+        cursor.close()
+        DB.close()
+        return {"error": "Invalid identifier. Provide 'Email' or 'FirstName' + 'LastName' + 'Department'."}
 
-    query = f"""
-        SELECT
-            SF.FirstName,
-            SF.LastName,
-            SF.Title,
-            SF.Email,
-            D.DName,
-            RO.BNumber,
-            RO.RNumber,
-            RT.TypeName,
-            RM.SqFt,
-            occ.OccupantCount
-        FROM STAFFandFACULTY SF
-        JOIN DEPARTMENTS D
-            ON SF.DeptID = D.DId
-        LEFT JOIN ROOMOCCUPANTS RO
-            ON SF.Email = RO.Email
-        LEFT JOIN ROOMS RM
-            ON RO.BNumber = RM.BNumber
-            AND RO.RNumber = RM.RNumber
-        LEFT JOIN ROOMTYPE RT
-            ON RM.RoomType = RT.TypeId
-        LEFT JOIN (
-            SELECT BNumber, RNumber, COUNT(*) AS OccupantCount
-            FROM ROOMOCCUPANTS
-            GROUP BY BNumber, RNumber
-        ) occ
-            ON RO.BNumber = occ.BNumber
-            AND RO.RNumber = occ.RNumber
-        WHERE {filter_clause}
-    """
+    employee = cursor.fetchone()
 
-    cursor.execute(query, params)
-    results = cursor.fetchall()
+    if employee is None:
+        cursor.close()
+        DB.close()
+        return None
 
-    employee = None
-
-    for fname, lname, title, email, dept, bnum, rnum, rtype, sqft, occ_count in results:
-
-        if employee is None:
-            employee = {
-                "FullName": f"{fname} {lname}",
-                "Department": dept,
-                "Title": title,
-                "Email": email,
-                "TotalSpace": 0,
-                "Rooms": []
-            }
-
-        if bnum and rnum:
-            if sqft and occ_count:
-                if occ_count == 1:
-                    assigned_space = float(sqft)
-                else:
-                    assigned_space = float(sqft) / occ_count
-            else:
-                assigned_space = 0
-
-            employee["Rooms"].append({
-                "BuildingNumber": bnum,
-                "RoomNumber": rnum,
-                "RoomType": rtype,
-                "RoomSquareFootage": sqft,
-                "AssignedSquareFootage": assigned_space
-            })
-
-            employee["TotalSpace"] += assigned_space
+    room_list, total_sqft = computeEmployeeRooms(cursor, employee["Email"])
 
     cursor.close()
     DB.close()
 
-    return employee
+    return {
+        "FullName": f"{employee['FirstName']} {employee['LastName']}",
+        "Department": employee["DName"],
+        "Email": employee["Email"],
+        "Title": employee["Title"],
+        "TotalAssignedSqFt": total_sqft,
+        "Rooms": room_list
+    }
 
 
 if __name__ == "__main__":
     print("Testing getEmployees()")
     employees = getEmployees("BCSM", "Statistics")
-    for emp in employees:
-        print(emp)
+    print(json.dumps(employees, indent=4))
 
     print("\nTesting getEmployeeInfo()")
-    employee = getEmployeeInfo({
-        "Email": "wcrow@calpoly.edu"
-    })
-    print(employee)
+    employee = getEmployeeInfo({"Email": "atheobol@calpoly.edu"})
+    print(json.dumps(employee, indent=4))
