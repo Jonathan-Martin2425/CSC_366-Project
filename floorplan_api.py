@@ -1,12 +1,11 @@
 from connector import make_connection
 from permissions import check_permission
+import json
 
 def getFloorplans():
-    # Connect to the database using the credentials
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 
-    # The SQL query that'll be executed
     query = """
         SELECT
             FLOORPLANS.FImagePath,
@@ -18,15 +17,12 @@ def getFloorplans():
         ON FLOORPLANS.BNumber = BUILDINGS.BNumber
     """
 
-    # Execute the SQL query on the database
     cursor.execute(query)
     results = cursor.fetchall()
 
-    # Close the database connection
     cursor.close()
     DB.close()
 
-    # Format the results to be readable and return them
     return [
         {
             "URI": uri,
@@ -38,6 +34,6 @@ def getFloorplans():
     ]
 
 if __name__ == "__main__":
+    print("Testing getFloorplans()")
     plans = getFloorplans()
-    for plan in plans:
-        print(plan)
+    print(json.dumps(plans, indent=4))
