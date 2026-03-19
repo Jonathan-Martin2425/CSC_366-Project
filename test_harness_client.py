@@ -8,14 +8,16 @@ from dataManipulation_api import *
 import json
 import sys
 
+
 def ensure_test_user(cursor, email, permission, dept=None, college=None):
     cursor.execute("SELECT Email FROM USERS WHERE Email=%s", (email,))
-    
+
     if cursor.fetchone() is None:
         cursor.execute("""
             INSERT INTO USERS (Email, UPermissionLevel, DeptID, CollegeID)
             VALUES (%s, %s, %s, %s)
         """, (email, permission, dept, college))
+
 
 def setup_users():
     DB = make_connection("settings.config")
@@ -36,7 +38,7 @@ def setup_users():
             cursor,
             "testemployee@calpoly.edu",
             "Department Update Level",
-            "109400",        # must exist in DEPARTMENTS
+            "109400",  # must exist in DEPARTMENTS
             "BCSM"
         )
 
@@ -54,19 +56,20 @@ def setup_users():
     finally:
         DB.close()
 
+
 if __name__ == "__main__":
     # ensure users exist
-    #setup_users()
+    # setup_users()
 
     # makes it so all prints get put into "output.txt"
     sys.stdout = open("output.txt", "w")
-
+    """
     print("\n=========================")
     print("Testing getFloorplans()")
     print("=========================")
     plans = getFloorplans("aamendes@calpoly.edu")
     print(json.dumps(plans, indent=4))
-
+    """
     print("\n=======================================================")
     print("Testing getRooms(buildingNumber: 033, floorNumber: 1)")
     print("=======================================================")
@@ -79,6 +82,7 @@ if __name__ == "__main__":
     room = findRoom("aamendes@calpoly.edu", "033", "1", 301, 899)
     print(json.dumps(room, indent=4))
 
+    """
     print("\n==============================")
     print("Testing findRoom(buildingNumber: 033, floorNumber: 1, x: 0, y: 0)")
     print("==============================")
@@ -90,6 +94,7 @@ if __name__ == "__main__":
     print("==============================")
     room = findRoom("aamendes@calpoly.edu", "181", "1", 0, 0)
     print(json.dumps(room, indent=4))
+    """
 
     print("\n==============================")
     print("Testing getRoomInfo(buildingNumber: 033, roomNumber: 0387-00)")
@@ -115,6 +120,7 @@ if __name__ == "__main__":
     employee = getEmployeeInfo("aamendes@calpoly.edu", {"Email": "atheobol@calpoly.edu"})
     print(json.dumps(employee, indent=4))
 
+    """
     print("\n==============================")
     print("Testing getEmployeeInfo()")
     print("==============================")
@@ -126,6 +132,7 @@ if __name__ == "__main__":
     print("==============================")
     employee = getEmployeeInfo("pander14@calpoly.edu", {"Email": "atheobol@calpoly.edu"})
     print(json.dumps(employee, indent=4))
+    """
 
     print("\n==========================================================")
     print("Testing getEquipmentLocations(equipmentType: ULT Freezer)")
@@ -159,6 +166,7 @@ if __name__ == "__main__":
     )
     print("Result:", ERROR_MESSAGES[result])
 
+    """
     print("\n==============================")
     print("Testing addEmployee()")
     print("==============================")
@@ -171,6 +179,7 @@ if __name__ == "__main__":
         "Professor"
     )
     print("Result:", ERROR_MESSAGES[result])
+    """
 
     print("\n=======================")
     print("Testing assignRoom()")
@@ -184,6 +193,7 @@ if __name__ == "__main__":
     result = removeRoomAssignment("jmmerria@calpoly.edu", "adavis99@calpoly.edu", "033", "0252-00")
     print("Result:", ERROR_MESSAGES[result])
 
+    """
     print("\n=======================")
     print("Testing assignRoom()")
     print("=======================")
@@ -207,6 +217,7 @@ if __name__ == "__main__":
     print("================================")
     result = removeRoomAssignment("jjasbins@calpoly.edu", "adavis99@calpoly.edu", "033", "0252-00")
     print("Result:", ERROR_MESSAGES[result])
+    """
 
     print("\n============================")
     print("Testing assignEquipment()")
@@ -220,6 +231,7 @@ if __name__ == "__main__":
     result = departmentAssignment("aamendes@calpoly.edu", "115200", "033", "0251-00")
     print("Result:", ERROR_MESSAGES[result])
 
+    """
     print("\n===============================")
     print("Testing departmentAssignment() BCSM College Update")
     print("==============================")
@@ -237,6 +249,7 @@ if __name__ == "__main__":
     print("==============================")
     result = departmentAssignment("jsharpe@calpoly.edu", "115200", "033", "0251-00")
     print("Result:", ERROR_MESSAGES[result])
+    """
 
     print("\n=============================")
     print("Testing addEquipmentType()")
@@ -244,10 +257,11 @@ if __name__ == "__main__":
     result = addEquipmentType("aamendes@calpoly.edu", "Quantum Computer", 1)
     print("Result:", ERROR_MESSAGES[result])
 
+    """
     print("\n=============================")
     print("Testing addEquipmentType()")
     print("=============================")
-    result = addEquipmentType("aamendes@calpoly.edu", "Quantum Computer", 1)
+    result = addEquipmentType("aamendes@calpoly.edu", "Laser", 1)
     print("Result:", ERROR_MESSAGES[result])
 
     print("\n=====================================")
@@ -255,6 +269,7 @@ if __name__ == "__main__":
     print("==============================")
     result = assignEquipment("abuffa@calpoly.edu", "033", "0252-00", "Bed", 3)
     print("Result:", ERROR_MESSAGES[result])
+    """
 
     # --- WAL Results ---
     print("\n===============")
