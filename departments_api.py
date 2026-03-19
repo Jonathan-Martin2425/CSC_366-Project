@@ -1,6 +1,5 @@
 from connector import make_connection
 from permissions import check_permission
-from errors_api import *
 import json
 
 def getDeptList(email, college):
