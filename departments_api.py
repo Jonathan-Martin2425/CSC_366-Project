@@ -1,9 +1,10 @@
 from connector import make_connection
 from permissions import check_permission
+from errors_api import *
 import json
 
 def getDeptList(email, college):
-    if not check_permission("College View", email, {"college": college}):
+    if not check_permission("Department View", email):
         return {"error": "Access denied."}
 
     DB = make_connection("settings.config")
@@ -78,7 +79,7 @@ def getDeptList(email, college):
 
 
 def getDeptListEnhanced(email, college):
-    if not check_permission("College View", email, {"college": college}):
+    if not check_permission("Department View", email):
         return {"error": "Access denied."}
 
     DB = make_connection("settings.config")
@@ -202,18 +203,10 @@ def getDeptListEnhanced(email, college):
 
 
 if __name__ == "__main__":
-    print("Testing getDeptList() with user in the correct college")
+    print("Testing getDeptList()")
     depts = getDeptList("jperrine@calpoly.edu", "BCSM")
     print(json.dumps(depts, indent=4))
 
-    print("Testing getDeptList() with user in the incorrect college")
-    depts2 = getDeptList("pander14@calpoly.edu", "BCSM")
-    print(json.dumps(depts2, indent=4))
-
-    print("\nTesting getDeptListEnhanced() with user in the correct college")
+    print("\nTesting getDeptListEnhanced()")
     depts = getDeptListEnhanced("jperrine@calpoly.edu", "BCSM")
-    print(json.dumps(depts, indent=4))
-
-    print("\nTesting getDeptListEnhanced() with user in the incorrect college")
-    depts = getDeptListEnhanced("pander14@calpoly.edu", "BCSM")
     print(json.dumps(depts, indent=4))
