@@ -73,14 +73,15 @@ if __name__ == "__main__":
     print("\n==============================")
     print("Testing findRoom()")
     print("==============================")
-    room = findRoom("033", "1", 100, 200)
+    room = findRoom("033", "1", 301, 899)
     print(room)
 
     print("\n==============================")
     print("Testing getRoomInfo()")
     print("==============================")
-    info = getRoomInfo("033", "101")
-    print(info)
+    info = getRoomInfo("033", "0387-00")
+    import json
+    print(json.dumps(info, indent=4))
 
     print("\n==============================")
     print("Testing getEmployees()")
