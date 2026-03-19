@@ -39,7 +39,15 @@ def addEmployee(userId, first, last, email, dept, title):
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 
-    affiliation = {"department": [dept]}
+    cursor.execute("""
+    SELECT College
+    FROM DEPARTMENTS
+    WHERE DId = %s
+    """, (dept,))
+
+    college = cursor.fetchone()[0]
+
+    affiliation = {"department": [dept], "college": college}
 
     if not check_permission("Update", userId, affiliation):
         DB.close()
