@@ -223,54 +223,48 @@ def departmentAssignment(userId, dept, building, room):
 
 
 # ----------------------------------------
-def assignEquipment(userId, building, room, equipType, newCount):
-
-    affiliation = getRoomAffiliation(building, room)
-
-    if affiliation is None:
-        affiliation = {
-            "department": [],
-            "college": ""
-        }
-
-    if not check_permission("Update", userId, affiliation):
-        return ERR_PERMISSION
+def assignEquipment(userId, building, room, equipName, newCount):
 
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 
     try:
-
+        # Get equipment TypeId from equipment name
         cursor.execute("""
-        SELECT COUNT(*)
+        SELECT TypeId
+        FROM EQUIPMENT
+        WHERE EquipName = %s
+        """, (equipName,))
+        result = cursor.fetchone()
+
+        if result is None:
+            DB.close()
+            return ERR_NOT_FOUND
+
+        equipType = result[0]
+
+        # Get room affiliation
+        affiliation = getRoomAffiliation(building, room)
+        if affiliation is None:
+            DB.close()
+            return ERR_NOT_FOUND
+
+        # Permission check
+        if not check_permission("Update", userId, affiliation):
+            DB.close()
+            return ERR_PERMISSION
+
+        # Check current count
+        cursor.execute("""
+        SELECT Quantity
         FROM EQUIPtoROOM
-        WHERE EquipType=%s AND BNumber=%s AND RNumber=%s
+        WHERE EquipType = %s AND BNumber = %s AND RNumber = %s
         """, (equipType, building, room))
+        result = cursor.fetchone()
 
-        before = cursor.fetchone()[0]
+        before = result[0] if result else 0
 
-        if newCount == 0:
-
-            cursor.execute("""
-            DELETE FROM EQUIPtoROOM
-            WHERE EquipType=%s AND BNumber=%s AND RNumber=%s
-            """, (equipType, building, room))
-
-        elif before == 0:
-
-            cursor.execute("""
-            INSERT INTO EQUIPtoROOM
-            VALUES (%s,%s,%s,NOW(),NULL)
-            """, (equipType, room, building))
-
-        else:
-
-            cursor.execute("""
-            UPDATE EQUIPtoROOM
-            SET DateAssigned=NOW()
-            WHERE EquipType=%s AND BNumber=%s AND RNumber=%s
-            """, (equipType, building, room))
-
+        # Write-ahead log
         log_result = logEquipmentAssignment(
             userId,
             building,
@@ -279,21 +273,40 @@ def assignEquipment(userId, building, room, equipType, newCount):
             before,
             newCount
         )
-
         if log_result != SUCCESS:
             DB.close()
             return ERR_LOGGING
 
+        # Apply change
+        if newCount <= 0:
+            cursor.execute("""
+            DELETE FROM EQUIPtoROOM
+            WHERE EquipType = %s AND BNumber = %s AND RNumber = %s
+            """, (equipType, building, room))
+
+        elif result is None:
+            cursor.execute("""
+            INSERT INTO EQUIPtoROOM
+                (EquipType, RNumber, BNumber, DateAssigned, Comments, Quantity)
+            VALUES (%s, %s, %s, NOW(), NULL, %s)
+            """, (equipType, room, building, newCount))
+
+        else:
+            cursor.execute("""
+            UPDATE EQUIPtoROOM
+            SET Quantity = %s,
+                DateAssigned = NOW()
+            WHERE EquipType = %s AND BNumber = %s AND RNumber = %s
+            """, (newCount, equipType, building, room))
+
         DB.commit()
         DB.close()
-
         return SUCCESS
 
     except Exception as e:
         print("assignEquipment error:", e)
         DB.close()
         return ERR_UNKNOWN
-
 
 # ----------------------------------------
 def addEquipmentType(userId, name, sensitive):

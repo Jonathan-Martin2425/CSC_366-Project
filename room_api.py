@@ -82,6 +82,8 @@ def findRoom(email, buildingNumber, floorNumber, x, y):
     }
 
 
+from decimal import Decimal
+
 def getRoomInfo(email, buildingNumber, roomNumber):
     if not check_permission("View", email):
         return {"error": "Access denied."}
@@ -123,7 +125,6 @@ def getRoomInfo(email, buildingNumber, roomNumber):
 
     cursor.execute(dept_query, (buildingNumber, roomNumber))
     dept = cursor.fetchone()
-
     department_name = dept["DName"] if dept else None
 
     people_query = """
@@ -151,17 +152,17 @@ def getRoomInfo(email, buildingNumber, roomNumber):
             "Title": person["Title"]
         })
 
+    # ✅ FIXED: use Quantity instead of COUNT(*)
     equipment_query = """
         SELECT
             EQUIPMENT.EquipName,
             EQUIPMENT.isSensitive,
-            COUNT(*) AS Quantity
+            EQUIPtoROOM.Quantity
         FROM EQUIPtoROOM
         JOIN EQUIPMENT
         ON EQUIPtoROOM.EquipType = EQUIPMENT.TypeId
         WHERE EQUIPtoROOM.BNumber = %s
         AND EQUIPtoROOM.RNumber = %s
-        GROUP BY EQUIPMENT.TypeId, EQUIPMENT.EquipName, EQUIPMENT.isSensitive
         ORDER BY EQUIPMENT.EquipName
     """
 
@@ -173,7 +174,8 @@ def getRoomInfo(email, buildingNumber, roomNumber):
         equipment.append({
             "Name": equip["EquipName"],
             "Sensitive": bool(equip["isSensitive"]),
-            "Count": equip["Quantity"]
+            # ✅ FIX: convert Decimal → int
+            "Count": int(equip["Quantity"]) if equip["Quantity"] is not None else 0
         })
 
     cursor.close()
@@ -185,7 +187,8 @@ def getRoomInfo(email, buildingNumber, roomNumber):
             "RoomNumber": roomNumber
         },
         "RoomAttributes": {
-            "SqFt": room["SqFt"],
+            # ✅ FIX: convert Decimal → float
+            "SqFt": float(room["SqFt"]) if room["SqFt"] is not None else None,
             "BoundingBox": room["BoundingBox"],
             "HasBackup": room["HasBackup"],
             "FloorNumber": room["FNumber"],

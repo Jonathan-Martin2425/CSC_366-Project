@@ -320,6 +320,42 @@ if __name__ == "__main__":
     result = assignEquipment("abuffa@calpoly.edu", "033", "0252-00", "Bed", 3)
     print("Result:", ERROR_MESSAGES[result])
 
+    print("\n=============================")
+    print("Testing assignEquipment() - assigning 1 Quantum Computer")
+    print("=============================")
+    result = assignEquipment("aamendes@calpoly.edu", "181", "0452-00","Quantum Computer", 1)
+    print("Result:", ERROR_MESSAGES[result])
+
+    print("\n=============================")
+    print("Testing assignEquipment() - assigning 2 Quantum Computer")
+    print("=============================")
+    result = assignEquipment("aamendes@calpoly.edu", "180", "0635-00","Quantum Computer", 2)
+    print("Result:", ERROR_MESSAGES[result])
+
+    print("\n=============================")
+    print("Testing assignEquipment() - assigning 3 Quantum Computer")
+    print("=============================")
+    result = assignEquipment("aamendes@calpoly.edu", "180", "0635-A0","Quantum Computer", 3)
+    print("Result:", ERROR_MESSAGES[result])
+
+    print("\n=============================")
+    print("Confirm Equipment in Room 0452-00")
+    print("=============================")
+    info = getRoomInfo("aamendes@calpoly.edu", "181", "0452-00")
+    print(json.dumps(info, indent=4))
+
+    print("\n=============================")
+    print("Confirm Equipment in Room 0635-00")
+    print("=============================")
+    info = getRoomInfo("aamendes@calpoly.edu", "180", "0635-00")
+    print(json.dumps(info, indent=4))
+
+    print("\n=============================")
+    print("Confirm Equipment in Room 0635-A0")
+    print("=============================")
+    info = getRoomInfo("aamendes@calpoly.edu", "180", "0635-A0")
+    print(json.dumps(info, indent=4))
+
     # --- WAL Results ---
     print("\n===============")
     print("WAL Results")
