@@ -1,7 +1,11 @@
 from connector import make_connection
+from permissions import check_permission
 import json
 
-def getRooms(buildingNumber, floorNumber):
+def getRooms(email, buildingNumber, floorNumber):
+    if not check_permission("Department View", email):
+        return {"error": "Access denied. Insufficient permissions."}
+
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 
@@ -42,7 +46,10 @@ def getRooms(buildingNumber, floorNumber):
     ]
 
 
-def findRoom(buildingNumber, floorNumber, x, y):
+def findRoom(email, buildingNumber, floorNumber, x, y):
+    if not check_permission("Department View", email):
+        return {"error": "Access denied. Insufficient permissions."}
+
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 
@@ -75,7 +82,10 @@ def findRoom(buildingNumber, floorNumber, x, y):
     }
 
 
-def getRoomInfo(buildingNumber, roomNumber):
+def getRoomInfo(email, buildingNumber, roomNumber):
+    if not check_permission("Department View", email):
+        return {"error": "Access denied. Insufficient permissions."}
+
     DB = make_connection("settings.config")
     cursor = DB.cursor(dictionary=True)
 
@@ -191,13 +201,13 @@ def getRoomInfo(buildingNumber, roomNumber):
 
 if __name__ == "__main__":
     print("Testing getRooms()")
-    rooms = getRooms("033", "1")
+    rooms = getRooms("jperrine@calpoly.edu", "033", "1")
     print(json.dumps(rooms, indent=4))
 
     print("\nTesting findRoom()")
-    room = findRoom("033", "1", 301, 899)
+    room = findRoom("jperrine@calpoly.edu", "033", "1", 301, 899)
     print(json.dumps(room, indent=4))
 
     print("\nTesting getRoomInfo()")
-    info = getRoomInfo("033", "0387-00")
+    info = getRoomInfo("jperrine@calpoly.edu", "033", "0387-00")
     print(json.dumps(info, indent=4))
