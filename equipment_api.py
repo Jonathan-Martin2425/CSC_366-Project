@@ -1,5 +1,6 @@
 from connector import make_connection
 from permissions import check_permission
+import json
 
 
 def getEquipmentLocations(equipmentType):
@@ -37,9 +38,9 @@ def getEquipmentLocations(equipmentType):
     return rooms
 
 
-def getSensitiveEquipmentLocations(collegeAbbrev):
+def getSensitiveEquipmentLocations(college):
     DB = make_connection("settings.config")
-    cursor = DB.cursor()
+    cursor = DB.cursor(dictionary=True, buffered=True)
 
     query = """
         SELECT
@@ -57,45 +58,41 @@ def getSensitiveEquipmentLocations(collegeAbbrev):
             AND DO.RNumber = ER.RNumber
         JOIN EQUIPMENT E
             ON ER.EquipType = E.TypeId
-        WHERE C.Abbreviation = %s
+        WHERE (C.CName = %s OR C.Abbreviation = %s)
         AND E.isSensitive = 1
         GROUP BY ER.BNumber, ER.RNumber, E.EquipName
         ORDER BY ER.BNumber, ER.RNumber
     """
 
-    cursor.execute(query, (collegeAbbrev,))
+    cursor.execute(query, (college, college))
     results = cursor.fetchall()
 
     rooms = {}
-
-    for bnum, rnum, equip_name, count in results:
-
-        key = (bnum, rnum)
+    for row in results:
+        key = (row["BNumber"], row["RNumber"])
 
         if key not in rooms:
             rooms[key] = {
-                "BuildingNumber": bnum,
-                "RoomNumber": rnum,
+                "BuildingNumber": row["BNumber"],
+                "RoomNumber": row["RNumber"],
                 "SensitiveEquipment": []
             }
 
         rooms[key]["SensitiveEquipment"].append({
-            "EquipmentType": equip_name,
-            "Count": count
+            "EquipmentType": row["EquipName"],
+            "Count": row["EquipCount"]
         })
 
     cursor.close()
     DB.close()
-
     return list(rooms.values())
 
 if __name__ == "__main__":
     print("Testing getEquipmentLocations()")
-    Rooms = getEquipmentLocations("Bed")
-    for room in Rooms:
-        print(room)
+    Rooms = getEquipmentLocations("ULT Freezer")
+    print(json.dumps(Rooms, indent=4))
 
-    print("Testing getSensitiveEquipmentLocations()")
+
+    print("\nTesting getSensitiveEquipmentLocations()")
     rooms = getSensitiveEquipmentLocations("BCSM")
-    for room in rooms:
-        print(room)
+    print(json.dumps(rooms, indent=4))
