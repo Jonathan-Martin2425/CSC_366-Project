@@ -16,12 +16,8 @@ pip install mysql-connector-python
 ## Setup
 1. Clone or download all files from the repository into your Python IDE or working directory.
 2. Create a `settings.config` file in the same directory with your database credentials in the following format:
-```
-[database]
-host = your_host
-user = your_username
-password = your_password
-database = your_database_name
+```json
+{"host": "mysql.labthreesixfive.com", "port": "3306", "user": "your_username", "password": "your_password", "database": "your_database_name"}
 ```
 
 ## File Structure
