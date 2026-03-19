@@ -1,16 +1,15 @@
 from connector import make_connection
 
 PERMISSION_LEVELS = {
-    "God Level": 5,
-    "College Update Level": 4,
-    "Department Update Level": 3,
-    "College View Level": 2,
-    "Department View Level": 1
+    "God": 5,
+    "College Update": 4,
+    "Department Update": 3,
+    "College View": 2,
+    "Department View": 1
 }
 
 
-def check_permission(requiredLevel, userId, affiliation=None):
-
+def check_permission(requiredLevel, userId, affiliation: dict = None):
     try:
         DB = make_connection("settings.config")
         cursor = DB.cursor()
@@ -37,7 +36,7 @@ def check_permission(requiredLevel, userId, affiliation=None):
         requiredLevelVal = PERMISSION_LEVELS[requiredLevel]
 
         # Admin override
-        if userPermissionLevel == "God Level":
+        if userPermissionLevel == "God":
             return True
 
         if userLevel < requiredLevelVal:
@@ -52,9 +51,12 @@ def check_permission(requiredLevel, userId, affiliation=None):
         # Department check
         if "department" in affiliation:
             allowed = affiliation["department"]
+
+            # if allowed is a string, make it a list instead for check
             if isinstance(allowed, str):
                 allowed = [allowed]
 
+            # check is the DeptID of the user is in one of the permitted departments for the check
             if userDept not in allowed:
                 return False
 

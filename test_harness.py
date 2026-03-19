@@ -6,6 +6,7 @@ from floorplan_api import getFloorplans
 from room_api import getRooms, findRoom, getRoomInfo
 from dataManipulation_api import *
 import json
+import sys
 
 def ensure_test_user(cursor, email, permission, dept=None, college=None):
     cursor.execute("SELECT Email FROM USERS WHERE Email=%s", (email,))
@@ -56,6 +57,9 @@ def setup_users():
 if __name__ == "__main__":
     # ensure users exist
     #setup_users()
+
+    # makes it so all prints get put into "output.txt"
+    sys.stdout = open("output.txt", "w")
 
     print("\n==============================")
     print("Testing getFloorplans()")

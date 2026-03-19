@@ -41,7 +41,7 @@ def addEmployee(userId, first, last, email, dept, title):
 
     affiliation = {"department": [dept]}
 
-    if not check_permission("Department Update Level", userId, affiliation):
+    if not check_permission("Department Update", userId, affiliation):
         DB.close()
         return ERR_PERMISSION
 
@@ -77,7 +77,7 @@ def assignRoom(userId, email, building, room):
     if affiliation is None:
         return ERR_NOT_FOUND
 
-    if not check_permission("Department Update Level", userId, affiliation):
+    if not check_permission("Department Update", userId, affiliation):
         return ERR_PERMISSION
 
     DB = make_connection("settings.config")
@@ -115,7 +115,7 @@ def removeRoomAssignment(userId, email, building, room):
     if affiliation is None:
         return ERR_NOT_FOUND
 
-    if not check_permission("Department Update Level", userId, affiliation):
+    if not check_permission("Department Update", userId, affiliation):
         return ERR_PERMISSION
 
     DB = make_connection("settings.config")
@@ -169,7 +169,7 @@ def departmentAssignment(userId, dept, building, room):
             "college": college
         }
 
-        if not check_permission("College Update Level", userId, affiliation):
+        if not check_permission("College Update", userId, affiliation):
             DB.close()
             return ERR_PERMISSION
 
@@ -217,7 +217,7 @@ def assignEquipment(userId, building, room, equipType, newCount):
     if affiliation is None:
         return ERR_NOT_FOUND
 
-    if not check_permission("Department Update Level", userId, affiliation):
+    if not check_permission("Department Update", userId, affiliation):
         return ERR_PERMISSION
 
     DB = make_connection("settings.config")
@@ -282,7 +282,7 @@ def assignEquipment(userId, building, room, equipType, newCount):
 # ----------------------------------------
 def addEquipmentType(userId, name, sensitive):
 
-    if not check_permission("God Level", userId, {}):
+    if not check_permission("God", userId, {}):
         return ERR_PERMISSION
 
     DB = make_connection("settings.config")
