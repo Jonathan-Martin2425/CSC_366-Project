@@ -1,0 +1,1794 @@
+
+=========================
+Testing getFloorplans()
+=========================
+[
+    {
+        "URI": "\"building-033-0_fisher-science_2.svg\"",
+        "BuildingName": "Clyde P. Fisher Science Hall",
+        "BuildingNumber": "033",
+        "FloorNumber": "1"
+    },
+    {
+        "URI": "building-033-Floor-3.svg",
+        "BuildingName": "Clyde P. Fisher Science Hall",
+        "BuildingNumber": "033",
+        "FloorNumber": "2"
+    },
+    {
+        "URI": "building033floor4.png",
+        "BuildingName": "Clyde P. Fisher Science Hall",
+        "BuildingNumber": "033",
+        "FloorNumber": "3"
+    },
+    {
+        "URI": "building-053-0_science-north_1.svg",
+        "BuildingName": "Science North",
+        "BuildingNumber": "053",
+        "FloorNumber": "1"
+    },
+    {
+        "URI": "building-053-0_science-north_2.svg",
+        "BuildingName": "Science North",
+        "BuildingNumber": "053",
+        "FloorNumber": "2"
+    }
+]
+
+=======================================================
+Testing getRooms(buildingNumber: 033, floorNumber: 1)
+=======================================================
+[
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0200-0E",
+        "BoundingBox": "POLYGON((344 467,360 467,360 452,344 452,344 467))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0201-0C",
+        "BoundingBox": "POLYGON((291 785,313 785,313 234,291 234,291 785))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0202-0C",
+        "BoundingBox": "POLYGON((313 562,381 562,381 471,313 471,313 562))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0203-0C",
+        "BoundingBox": "POLYGON((386 563,540 563,540 471,386 471,386 563))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0204-0C",
+        "BoundingBox": "POLYGON((447 545,475 545,475 487,447 487,447 545))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0205-0C",
+        "BoundingBox": "POLYGON((263 636,289 636,289 618,263 618,263 636))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0206-0C",
+        "BoundingBox": "POLYGON((263 654,289 654,289 636,263 636,263 654))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0251-00",
+        "BoundingBox": "POLYGON((252 470,289 470,289 440,252 440,252 470))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0251-A0",
+        "BoundingBox": "POLYGON((223 469,252 469,252 455,223 455,223 469))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0251-B0",
+        "BoundingBox": "POLYGON((223 453,252 453,252 440,223 440,223 453))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0252-00",
+        "BoundingBox": "POLYGON((223 437,290 437,290 390,223 390,223 437))",
+        "Department": "Mathematics"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0253-00",
+        "BoundingBox": "POLYGON((221 390,290 390,290 312,221 312,221 390))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0253-A0",
+        "BoundingBox": "POLYGON((231 310,274 310,274 286,231 286,231 310))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0254-00",
+        "BoundingBox": "POLYGON((223 307,289 307,289 262,223 262,223 307))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0255-00",
+        "BoundingBox": "POLYGON((223 235,290 235,290 186,223 186,223 235))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0255-A0",
+        "BoundingBox": "POLYGON((229 260,290 260,290 235,229 235,229 260))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0256-00",
+        "BoundingBox": "POLYGON((223 185,290 185,290 114,223 114,223 185))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0257-00",
+        "BoundingBox": "POLYGON((315 283,383 283,383 244,315 244,315 283))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0257-A0",
+        "BoundingBox": "POLYGON((315 243,339 243,339 216,315 216,315 243))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0257-B0",
+        "BoundingBox": "POLYGON((340 243,357 243,357 216,340 216,340 243))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0257-C0",
+        "BoundingBox": "POLYGON((358 243,383 243,383 216,358 216,358 243))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0257-D0",
+        "BoundingBox": "POLYGON((361 317,383 317,383 286,361 286,361 317))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0257-E0",
+        "BoundingBox": "POLYGON((336 317,361 317,361 286,336 286,336 317))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0257-F0",
+        "BoundingBox": "POLYGON((315 317,335 317,335 286,315 286,315 317))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0258-00",
+        "BoundingBox": "POLYGON((315 393,383 393,383 318,315 318,315 393))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0258-A0",
+        "BoundingBox": "POLYGON((350 426,383 426,383 394,350 394,350 426))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0259-00",
+        "BoundingBox": "POLYGON((315 425,348 425,348 394,315 394,315 425))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0260-00",
+        "BoundingBox": "POLYGON((315 448,358 448,358 427,315 427,315 448))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0262-00",
+        "BoundingBox": "POLYGON((365 467,381 467,381 427,365 427,365 467))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0263-00",
+        "BoundingBox": "POLYGON((386 467,410 467,410 438,386 438,386 467))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0264-00",
+        "BoundingBox": "POLYGON((413 468,434 468,434 439,413 439,413 468))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0265-00",
+        "BoundingBox": "POLYGON((434 468,454 468,454 439,434 439,434 468))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0266-00",
+        "BoundingBox": "POLYGON((454 468,475 468,475 438,454 438,454 468))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0267-00",
+        "BoundingBox": "POLYGON((477 468,495 468,495 438,477 438,477 468))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0268-00",
+        "BoundingBox": "POLYGON((497 467,518 467,518 438,497 438,497 467))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0269-00",
+        "BoundingBox": "POLYGON((518 467,539 467,539 439,518 439,518 467))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0270-00",
+        "BoundingBox": "POLYGON((541 478,570 478,570 432,541 432,541 478))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0271-00",
+        "BoundingBox": "POLYGON((539 504,570 504,570 480,539 480,539 504))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0272-00",
+        "BoundingBox": "POLYGON((539 528,570 528,570 505,539 505,539 528))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0273-00",
+        "BoundingBox": "POLYGON((539 561,571 561,571 531,539 531,539 561))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0274-00",
+        "BoundingBox": "POLYGON((530 596,566 596,566 563,530 563,530 596))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0275-00",
+        "BoundingBox": "POLYGON((508 593,528 593,528 562,508 562,508 593))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0276-00",
+        "BoundingBox": "POLYGON((485 593,507 593,507 562,485 562,485 593))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0277-00",
+        "BoundingBox": "POLYGON((459 593,485 593,485 564,459 564,459 593))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0278-00",
+        "BoundingBox": "POLYGON((434 595,459 595,459 563,434 563,434 595))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0279-00",
+        "BoundingBox": "POLYGON((428 543,447 543,447 518,428 518,428 543))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0279-A0",
+        "BoundingBox": "POLYGON((389 542,428 542,428 518,389 518,389 542))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0280-00",
+        "BoundingBox": "POLYGON((428 515,447 515,447 489,428 489,428 515))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0280-A0",
+        "BoundingBox": "POLYGON((391 516,428 516,428 488,391 488,391 516))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0281-00",
+        "BoundingBox": "POLYGON((477 514,523 514,523 490,477 490,477 514))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0282-00",
+        "BoundingBox": "POLYGON((477 543,523 543,523 517,477 517,477 543))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0285-00",
+        "BoundingBox": "POLYGON((315 766,384 766,384 666,315 666,315 766))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0285-A0",
+        "BoundingBox": "POLYGON((315 794,383 794,383 767,315 767,315 794))",
+        "Department": "Biological Sciences"
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0288-00",
+        "BoundingBox": "POLYGON((231 749,282 749,282 724,231 724,231 749))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0293-00",
+        "BoundingBox": "POLYGON((292 127,313 127,313 101,292 101,292 127))",
+        "Department": null
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0294-00",
+        "BoundingBox": "POLYGON((289 913,313 913,313 885,289 885,289 913))",
+        "Department": null
+    }
+]
+
+=======================================================================
+Testing findRoom(buildingNumber: 033, floorNumber: 1, x: 301, y: 899)
+=======================================================================
+{
+    "BuildingNumber": "033",
+    "RoomNumber": "0294-00"
+}
+
+==============================
+Testing findRoom(buildingNumber: 033, floorNumber: 1, x: 0, y: 0)
+==============================
+null
+
+==============================
+Testing findRoom(buildingNumber: 181, floorNumber: 1, x: 0, y: 0)
+==============================
+null
+
+==============================
+Testing getRoomInfo(buildingNumber: 033, roomNumber: 0387-00)
+===============================================================
+{
+    "RoomID": {
+        "BuildingNumber": "033",
+        "RoomNumber": "0387-00"
+    },
+    "RoomAttributes": {
+        "SqFt": 491.45,
+        "BoundingBox": "POLYGON((264 527,316 527,316 492,264 492,264 527))",
+        "HasBackup": 0,
+        "FloorNumber": "2",
+        "FBNumber": "033",
+        "RoomType": 250,
+        "RoomSpace": 4
+    },
+    "Department": "Biological Sciences",
+    "People": [
+        {
+            "FullName": "Mallary Greenlee-Wacker",
+            "Email": "mcgreenl@calpoly.edu",
+            "Title": "Faculty"
+        }
+    ],
+    "Equipment": [
+        {
+            "Name": "Refrigerator and/or Freezer ",
+            "Sensitive": true,
+            "Count": 1
+        }
+    ]
+}
+
+===================================
+Testing getDeptList(college: BCSM)
+===================================
+[
+    {
+        "DepartmentName": "Liberal Studies",
+        "MainOffice": {
+            "BuildingNumber": "025",
+            "RoomNumber": "0125-C0"
+        },
+        "DepartmentHead": "Seth Bush",
+        "DepartmentType": "Academic"
+    },
+    {
+        "DepartmentName": "Biological Sciences",
+        "MainOffice": {
+            "BuildingNumber": "033",
+            "RoomNumber": "0274-00"
+        },
+        "DepartmentHead": "Michael Black",
+        "DepartmentType": "Academic"
+    },
+    {
+        "DepartmentName": "Chemistry & Biochemistry",
+        "MainOffice": {
+            "BuildingNumber": "180",
+            "RoomNumber": "0205-A0"
+        },
+        "DepartmentHead": "John Hagen",
+        "DepartmentType": "Academic"
+    },
+    {
+        "DepartmentName": "Statistics",
+        "MainOffice": {
+            "BuildingNumber": "025",
+            "RoomNumber": "0107-C0"
+        },
+        "DepartmentHead": "Andrew Schaffner",
+        "DepartmentType": "Academic"
+    },
+    {
+        "DepartmentName": "Mathematics",
+        "MainOffice": {
+            "BuildingNumber": "025",
+            "RoomNumber": "0208-DC"
+        },
+        "DepartmentHead": "Benjamin Richert",
+        "DepartmentType": "Academic"
+    },
+    {
+        "DepartmentName": "Physics",
+        "MainOffice": {
+            "BuildingNumber": "180",
+            "RoomNumber": "0204-B0"
+        },
+        "DepartmentHead": "Jennifer Klay",
+        "DepartmentType": "Academic"
+    },
+    {
+        "DepartmentName": "Kinesiology & Public Hlth",
+        "MainOffice": {
+            "BuildingNumber": "043-A",
+            "RoomNumber": "0458-E0"
+        },
+        "DepartmentHead": "Todd Hagobian",
+        "DepartmentType": "Academic"
+    },
+    {
+        "DepartmentName": "College General Use",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic"
+    },
+    {
+        "DepartmentName": "Advising Center",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic"
+    },
+    {
+        "DepartmentName": "Deans Office",
+        "MainOffice": {
+            "BuildingNumber": "025",
+            "RoomNumber": "0229-B0"
+        },
+        "DepartmentHead": "Dean Wendt",
+        "DepartmentType": "Academic"
+    },
+    {
+        "DepartmentName": "Computing Support Services",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic"
+    },
+    {
+        "DepartmentName": "Advancement",
+        "MainOffice": {
+            "BuildingNumber": "025",
+            "RoomNumber": "0238-00"
+        },
+        "DepartmentHead": "Morgen Marshall",
+        "DepartmentType": "Academic"
+    },
+    {
+        "DepartmentName": "Cntr for Cstal Marine Sci",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic"
+    },
+    {
+        "DepartmentName": "Health Professions",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic"
+    },
+    {
+        "DepartmentName": "Ctr Sci Math Teacher Educ",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic"
+    },
+    {
+        "DepartmentName": "Math Science Teacher Int",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic"
+    },
+    {
+        "DepartmentName": "LSAMP",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic"
+    },
+    {
+        "DepartmentName": "STAR",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic"
+    },
+    {
+        "DepartmentName": "Design & Fabrication F\u00e1cil",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic"
+    },
+    {
+        "DepartmentName": "School of Education",
+        "MainOffice": {
+            "BuildingNumber": "002",
+            "RoomNumber": "0123-00"
+        },
+        "DepartmentHead": "Megan Guise",
+        "DepartmentType": "Academic"
+    }
+]
+
+============================================================
+Testing getEmployees(college: BCSM, department: Statistics)
+============================================================
+[
+    {
+        "FullName": "Anelise Sabbag",
+        "Title": "Faculty",
+        "Email": "asabbag@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0222-00"
+            }
+        ],
+        "TotalSqFt": 92.65
+    },
+    {
+        "FullName": "Andrew Schaffner",
+        "Title": "Faculty",
+        "Email": "aschaffn@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0107-C0"
+            }
+        ],
+        "TotalSqFt": 157.02
+    },
+    {
+        "FullName": "Allison Theobold",
+        "Title": "Faculty",
+        "Email": "atheobol@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0105-00"
+            }
+        ],
+        "TotalSqFt": 109.62
+    },
+    {
+        "FullName": "Bret Holladay",
+        "Title": "Faculty",
+        "Email": "bahollad@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0122-00"
+            }
+        ],
+        "TotalSqFt": 102.2
+    },
+    {
+        "FullName": "Beth Chance",
+        "Title": "Faculty",
+        "Email": "bchance@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0235-00"
+            }
+        ],
+        "TotalSqFt": 115.83
+    },
+    {
+        "FullName": "Billie-Jo Grant",
+        "Title": "Faculty",
+        "Email": "bgrant02@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0119-00"
+            }
+        ],
+        "TotalSqFt": 48.88
+    },
+    {
+        "FullName": "Charlotte Mann",
+        "Title": "Faculty",
+        "Email": "czmann@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0201-00"
+            }
+        ],
+        "TotalSqFt": 107.67
+    },
+    {
+        "FullName": "Deniz Yenigun",
+        "Title": "Faculty",
+        "Email": "dyenigun@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0129-00"
+            }
+        ],
+        "TotalSqFt": 108.22
+    },
+    {
+        "FullName": "Emily Robinson",
+        "Title": "Faculty",
+        "Email": "erobin17@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0103-00"
+            }
+        ],
+        "TotalSqFt": 109.62
+    },
+    {
+        "FullName": "Felicia Korengel",
+        "Title": "Faculty",
+        "Email": "fkorenge@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0215-00"
+            }
+        ],
+        "TotalSqFt": 95.27
+    },
+    {
+        "FullName": "Frank Giron",
+        "Title": "Faculty",
+        "Email": "frgiron@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0207-00"
+            }
+        ],
+        "TotalSqFt": 108.24
+    },
+    {
+        "FullName": "Hunter Glanz",
+        "Title": "Faculty",
+        "Email": "hglanz@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0111-00"
+            }
+        ],
+        "TotalSqFt": 102.2
+    },
+    {
+        "FullName": "Heather Smith",
+        "Title": "Faculty",
+        "Email": "hsmith@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0112-00"
+            }
+        ],
+        "TotalSqFt": 102.2
+    },
+    {
+        "FullName": "Immanuel Williams",
+        "Title": "Faculty",
+        "Email": "imwillia@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0113-00"
+            }
+        ],
+        "TotalSqFt": 97.76
+    },
+    {
+        "FullName": "Jimmy Doi",
+        "Title": "Faculty",
+        "Email": "jdoi@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0108-00"
+            }
+        ],
+        "TotalSqFt": 99.36
+    },
+    {
+        "FullName": "James Oksanish",
+        "Title": "Faculty",
+        "Email": "joksanis@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0216-00"
+            }
+        ],
+        "TotalSqFt": 83.76
+    },
+    {
+        "FullName": "Julia Schedler",
+        "Title": "Faculty",
+        "Email": "jschedle@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0212-00"
+            }
+        ],
+        "TotalSqFt": 90.1
+    },
+    {
+        "FullName": "Jeffrey Sklar",
+        "Title": "Faculty",
+        "Email": "jsklar@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0110-00"
+            }
+        ],
+        "TotalSqFt": 102.2
+    },
+    {
+        "FullName": "John Walker",
+        "Title": "Faculty",
+        "Email": "jwalker@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0226-00"
+            }
+        ],
+        "TotalSqFt": 93.74
+    },
+    {
+        "FullName": "Kelly Bodwin",
+        "Title": "Faculty",
+        "Email": "kbodwin@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0106-00"
+            }
+        ],
+        "TotalSqFt": 105.99
+    },
+    {
+        "FullName": "Kevin Ross",
+        "Title": "Faculty",
+        "Email": "kjross@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0237-00"
+            }
+        ],
+        "TotalSqFt": 98.33
+    },
+    {
+        "FullName": "Karen McGaughey",
+        "Title": "Faculty",
+        "Email": "kmcgaugh@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0102-00"
+            }
+        ],
+        "TotalSqFt": 109.62
+    },
+    {
+        "FullName": "Lubaba Alim",
+        "Title": "Faculty",
+        "Email": "lfalim@calpoly.edu",
+        "Rooms": [],
+        "TotalSqFt": 0.0
+    },
+    {
+        "FullName": "Matt Carlton",
+        "Title": "Faculty",
+        "Email": "mcarlton@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0101-00"
+            }
+        ],
+        "TotalSqFt": 101.49
+    },
+    {
+        "FullName": "Michael Ion",
+        "Title": "Faculty",
+        "Email": "mion@calpoly.edu",
+        "Rooms": [],
+        "TotalSqFt": 0.0
+    },
+    {
+        "FullName": "Marieke Montenegro",
+        "Title": "Staff",
+        "Email": "mmonte19@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0107-D0"
+            }
+        ],
+        "TotalSqFt": 275.86
+    },
+    {
+        "FullName": "Maddie Schroth",
+        "Title": "Faculty",
+        "Email": "mschroth@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0223-00"
+            }
+        ],
+        "TotalSqFt": 92.96
+    },
+    {
+        "FullName": "Nianpin Cheng",
+        "Title": "Faculty",
+        "Email": "ncheng@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0119-00"
+            }
+        ],
+        "TotalSqFt": 48.88
+    },
+    {
+        "FullName": "Olga Dekhtyar",
+        "Title": "Faculty",
+        "Email": "odekhtya@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0130-00"
+            }
+        ],
+        "TotalSqFt": 111.03
+    },
+    {
+        "FullName": "Sinem Demirci",
+        "Title": "Faculty",
+        "Email": "sdemirci@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0213-00"
+            }
+        ],
+        "TotalSqFt": 95.34
+    },
+    {
+        "FullName": "Samuel Frame",
+        "Title": "Faculty",
+        "Email": "sframe@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0121-00"
+            }
+        ],
+        "TotalSqFt": 102.2
+    },
+    {
+        "FullName": "Soma Roy",
+        "Title": "Faculty",
+        "Email": "soroy@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0104-00"
+            }
+        ],
+        "TotalSqFt": 109.62
+    },
+    {
+        "FullName": "Steve Rein",
+        "Title": "Faculty",
+        "Email": "srein@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0234-00"
+            }
+        ],
+        "TotalSqFt": 107.04
+    },
+    {
+        "FullName": "Trevor Ruiz",
+        "Title": "Faculty",
+        "Email": "truiz01@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0236-00"
+            }
+        ],
+        "TotalSqFt": 98.3
+    },
+    {
+        "FullName": "Ulric Lund",
+        "Title": "Faculty",
+        "Email": "ulund@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0214-00"
+            }
+        ],
+        "TotalSqFt": 95.3
+    },
+    {
+        "FullName": "Vance Larsen",
+        "Title": "Faculty",
+        "Email": "vjlarsen@calpoly.edu",
+        "Rooms": [],
+        "TotalSqFt": 0.0
+    },
+    {
+        "FullName": "Yi-Hui Wang",
+        "Title": "Faculty",
+        "Email": "ywang59@calpoly.edu",
+        "Rooms": [],
+        "TotalSqFt": 0.0
+    },
+    {
+        "FullName": "Zoe Rehnberg",
+        "Title": "Faculty",
+        "Email": "zrehnber@calpoly.edu",
+        "Rooms": [
+            {
+                "BuildingNumber": "025",
+                "RoomNumber": "0109-00"
+            }
+        ],
+        "TotalSqFt": 102.2
+    }
+]
+
+==============================
+Testing getEmployeeInfo()
+==============================
+{
+    "FullName": "Allison Theobold",
+    "Department": "Statistics",
+    "Email": "atheobol@calpoly.edu",
+    "Title": "Faculty",
+    "TotalAssignedSqFt": 109.62,
+    "Rooms": [
+        {
+            "BuildingNumber": "025",
+            "RoomNumber": "0105-00",
+            "RoomType": "Faculty Office",
+            "SqFt": 109.62,
+            "AssignedSqFt": 109.62
+        }
+    ]
+}
+
+==============================
+Testing getEmployeeInfo()
+==============================
+{
+    "error": 8
+}
+
+==============================
+Testing getEmployeeInfo()
+==============================
+{
+    "error": 8
+}
+
+==========================================================
+Testing getEquipmentLocations(equipmentType: ULT Freezer)
+==========================================================
+[
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0258-A0",
+        "EquipmentCount": 1
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0394-00",
+        "EquipmentCount": 1
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0395-00",
+        "EquipmentCount": 1
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0466-00",
+        "EquipmentCount": 1
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0468-A0",
+        "EquipmentCount": 1
+    },
+    {
+        "BuildingNumber": "180",
+        "RoomNumber": "0463-00",
+        "EquipmentCount": 1
+    },
+    {
+        "BuildingNumber": "180",
+        "RoomNumber": "0466-00",
+        "EquipmentCount": 1
+    },
+    {
+        "BuildingNumber": "180",
+        "RoomNumber": "0469-00",
+        "EquipmentCount": 1
+    },
+    {
+        "BuildingNumber": "180",
+        "RoomNumber": "0536-00",
+        "EquipmentCount": 1
+    },
+    {
+        "BuildingNumber": "181",
+        "RoomNumber": "0303-A0",
+        "EquipmentCount": 1
+    },
+    {
+        "BuildingNumber": "181",
+        "RoomNumber": "0350-B0",
+        "EquipmentCount": 1
+    },
+    {
+        "BuildingNumber": "181",
+        "RoomNumber": "0403-A0",
+        "EquipmentCount": 1
+    },
+    {
+        "BuildingNumber": "181",
+        "RoomNumber": "0450-B0",
+        "EquipmentCount": 1
+    }
+]
+
+======================================================
+Testing getSensitiveEquipmentLocations(college: BCSM)
+======================================================
+[
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0251-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0355-C0",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0357-A0",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0387-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0387-A0",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "CO2 incubator",
+                "Count": 1
+            },
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0388-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0389-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0391-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0459-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0460-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0470-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0471-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0472-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "033",
+        "RoomNumber": "0473-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "053",
+        "RoomNumber": "0114-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 2
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "053",
+        "RoomNumber": "0305-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "053",
+        "RoomNumber": "0316-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "180",
+        "RoomNumber": "0465-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "180",
+        "RoomNumber": "0469-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            },
+            {
+                "EquipmentType": "ULT Freezer",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "180",
+        "RoomNumber": "0635-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Vacuum pump and laser",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "180",
+        "RoomNumber": "0635-A0",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Vacuum pump and laser",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "181",
+        "RoomNumber": "0351-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Luminex and other processing equipment",
+                "Count": 1
+            },
+            {
+                "EquipmentType": "Research computers",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "181",
+        "RoomNumber": "0403-B0",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Refrigerator and/or Freezer ",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "181",
+        "RoomNumber": "0403-BA",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Mass Spectrometer",
+                "Count": 1
+            }
+        ]
+    },
+    {
+        "BuildingNumber": "181",
+        "RoomNumber": "0452-00",
+        "SensitiveEquipment": [
+            {
+                "EquipmentType": "Glove Box",
+                "Count": 1
+            }
+        ]
+    }
+]
+
+===========================================
+Testing getDeptListEnhanced(college: BCSM)
+===========================================
+[
+    {
+        "DepartmentName": "Liberal Studies",
+        "MainOffice": {
+            "BuildingNumber": "025",
+            "RoomNumber": "0125-C0"
+        },
+        "DepartmentHead": "Seth Bush",
+        "DepartmentType": "Academic",
+        "AssignedRooms": {
+            "RoomCount": 10,
+            "TotalSqFt": 4579.269981384277
+        },
+        "EmployeeRooms": {
+            "RoomCount": 9,
+            "TotalSqFt": 3370.37996673584
+        }
+    },
+    {
+        "DepartmentName": "Biological Sciences",
+        "MainOffice": {
+            "BuildingNumber": "033",
+            "RoomNumber": "0274-00"
+        },
+        "DepartmentHead": "Michael Black",
+        "DepartmentType": "Academic",
+        "AssignedRooms": {
+            "RoomCount": 107,
+            "TotalSqFt": 31357.130096435547
+        },
+        "EmployeeRooms": {
+            "RoomCount": 107,
+            "TotalSqFt": 30338.550102233887
+        }
+    },
+    {
+        "DepartmentName": "Chemistry & Biochemistry",
+        "MainOffice": {
+            "BuildingNumber": "180",
+            "RoomNumber": "0205-A0"
+        },
+        "DepartmentHead": "John Hagen",
+        "DepartmentType": "Academic",
+        "AssignedRooms": {
+            "RoomCount": 71,
+            "TotalSqFt": 25759.190002441406
+        },
+        "EmployeeRooms": {
+            "RoomCount": 70,
+            "TotalSqFt": 23513.43003845215
+        }
+    },
+    {
+        "DepartmentName": "Statistics",
+        "MainOffice": {
+            "BuildingNumber": "025",
+            "RoomNumber": "0107-C0"
+        },
+        "DepartmentHead": "Andrew Schaffner",
+        "DepartmentType": "Academic",
+        "AssignedRooms": {
+            "RoomCount": 33,
+            "TotalSqFt": 3580.699981689453
+        },
+        "EmployeeRooms": {
+            "RoomCount": 33,
+            "TotalSqFt": 2643.0799865722656
+        }
+    },
+    {
+        "DepartmentName": "Mathematics",
+        "MainOffice": {
+            "BuildingNumber": "025",
+            "RoomNumber": "0208-DC"
+        },
+        "DepartmentHead": "Benjamin Richert",
+        "DepartmentType": "Academic",
+        "AssignedRooms": {
+            "RoomCount": 51,
+            "TotalSqFt": 5894.989990234375
+        },
+        "EmployeeRooms": {
+            "RoomCount": 48,
+            "TotalSqFt": 4248.419990539551
+        }
+    },
+    {
+        "DepartmentName": "Physics",
+        "MainOffice": {
+            "BuildingNumber": "180",
+            "RoomNumber": "0204-B0"
+        },
+        "DepartmentHead": "Jennifer Klay",
+        "DepartmentType": "Academic",
+        "AssignedRooms": {
+            "RoomCount": 66,
+            "TotalSqFt": 15899.119941711426
+        },
+        "EmployeeRooms": {
+            "RoomCount": 68,
+            "TotalSqFt": 14418.119926452637
+        }
+    },
+    {
+        "DepartmentName": "Kinesiology & Public Hlth",
+        "MainOffice": {
+            "BuildingNumber": "043-A",
+            "RoomNumber": "0458-E0"
+        },
+        "DepartmentHead": "Todd Hagobian",
+        "DepartmentType": "Academic",
+        "AssignedRooms": {
+            "RoomCount": 37,
+            "TotalSqFt": 6494.049942016602
+        },
+        "EmployeeRooms": {
+            "RoomCount": 38,
+            "TotalSqFt": 5270.739959716797
+        }
+    },
+    {
+        "DepartmentName": "College General Use",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic",
+        "AssignedRooms": {
+            "RoomCount": 0,
+            "TotalSqFt": null
+        },
+        "EmployeeRooms": {
+            "RoomCount": 3,
+            "TotalSqFt": 560.6099853515625
+        }
+    },
+    {
+        "DepartmentName": "Advising Center",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic",
+        "AssignedRooms": {
+            "RoomCount": 8,
+            "TotalSqFt": 1049.7099914550781
+        },
+        "EmployeeRooms": {
+            "RoomCount": 8,
+            "TotalSqFt": 664.1900024414062
+        }
+    },
+    {
+        "DepartmentName": "Deans Office",
+        "MainOffice": {
+            "BuildingNumber": "025",
+            "RoomNumber": "0229-B0"
+        },
+        "DepartmentHead": "Dean Wendt",
+        "DepartmentType": "Academic",
+        "AssignedRooms": {
+            "RoomCount": 9,
+            "TotalSqFt": 2047.4500198364258
+        },
+        "EmployeeRooms": {
+            "RoomCount": 9,
+            "TotalSqFt": 2033.9500198364258
+        }
+    },
+    {
+        "DepartmentName": "Computing Support Services",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic",
+        "AssignedRooms": {
+            "RoomCount": 0,
+            "TotalSqFt": null
+        },
+        "EmployeeRooms": {
+            "RoomCount": 0,
+            "TotalSqFt": 0
+        }
+    },
+    {
+        "DepartmentName": "Advancement",
+        "MainOffice": {
+            "BuildingNumber": "025",
+            "RoomNumber": "0238-00"
+        },
+        "DepartmentHead": "Morgen Marshall",
+        "DepartmentType": "Academic",
+        "AssignedRooms": {
+            "RoomCount": 2,
+            "TotalSqFt": 198.0300064086914
+        },
+        "EmployeeRooms": {
+            "RoomCount": 2,
+            "TotalSqFt": 198.0300064086914
+        }
+    },
+    {
+        "DepartmentName": "Cntr for Cstal Marine Sci",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic",
+        "AssignedRooms": {
+            "RoomCount": 2,
+            "TotalSqFt": 461.37000274658203
+        },
+        "EmployeeRooms": {
+            "RoomCount": 2,
+            "TotalSqFt": 461.37000274658203
+        }
+    },
+    {
+        "DepartmentName": "Health Professions",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic",
+        "AssignedRooms": {
+            "RoomCount": 0,
+            "TotalSqFt": null
+        },
+        "EmployeeRooms": {
+            "RoomCount": 0,
+            "TotalSqFt": 0
+        }
+    },
+    {
+        "DepartmentName": "Ctr Sci Math Teacher Educ",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic",
+        "AssignedRooms": {
+            "RoomCount": 0,
+            "TotalSqFt": null
+        },
+        "EmployeeRooms": {
+            "RoomCount": 0,
+            "TotalSqFt": 0
+        }
+    },
+    {
+        "DepartmentName": "Math Science Teacher Int",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic",
+        "AssignedRooms": {
+            "RoomCount": 0,
+            "TotalSqFt": null
+        },
+        "EmployeeRooms": {
+            "RoomCount": 0,
+            "TotalSqFt": 0
+        }
+    },
+    {
+        "DepartmentName": "LSAMP",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic",
+        "AssignedRooms": {
+            "RoomCount": 0,
+            "TotalSqFt": null
+        },
+        "EmployeeRooms": {
+            "RoomCount": 0,
+            "TotalSqFt": 0
+        }
+    },
+    {
+        "DepartmentName": "STAR",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic",
+        "AssignedRooms": {
+            "RoomCount": 0,
+            "TotalSqFt": null
+        },
+        "EmployeeRooms": {
+            "RoomCount": 0,
+            "TotalSqFt": null
+        }
+    },
+    {
+        "DepartmentName": "Design & Fabrication F\u00e1cil",
+        "MainOffice": null,
+        "DepartmentHead": null,
+        "DepartmentType": "Non-Academic",
+        "AssignedRooms": {
+            "RoomCount": 1,
+            "TotalSqFt": 168.8000030517578
+        },
+        "EmployeeRooms": {
+            "RoomCount": 1,
+            "TotalSqFt": 168.8000030517578
+        }
+    },
+    {
+        "DepartmentName": "School of Education",
+        "MainOffice": {
+            "BuildingNumber": "002",
+            "RoomNumber": "0123-00"
+        },
+        "DepartmentHead": "Megan Guise",
+        "DepartmentType": "Academic",
+        "AssignedRooms": {
+            "RoomCount": 23,
+            "TotalSqFt": 5361.969970703125
+        },
+        "EmployeeRooms": {
+            "RoomCount": 21,
+            "TotalSqFt": 3276.009979248047
+        }
+    }
+]
+
+==============================
+Testing addEmployee() - With View Permission
+==============================
+Result: Incorrect permission level
+
+==============================
+Testing addEmployee() - Wrong Department Permissions
+==============================
+Result: Incorrect permission level
+
+==============================
+Testing addEmployee() - Correct Department Permissions
+==============================
+addEmployee error: 1062 (23000): Duplicate entry '3testemployee@calpoly.edu' for key 'STAFFandFACULTY.PRIMARY'
+Result: Duplicate record exists
+
+==============================
+Testing addEmployee() - Same College Update Permissions
+==============================
+addEmployee error: 1062 (23000): Duplicate entry '4testemployee@calpoly.edu' for key 'STAFFandFACULTY.PRIMARY'
+Result: Duplicate record exists
+
+==============================
+Testing addEmployee() - Different College Update Permissions
+==============================
+Result: Incorrect permission level
+
+==============================
+Testing addEmployee() - Admin Permissions
+==============================
+addEmployee error: 1062 (23000): Duplicate entry '6testemployee@calpoly.edu' for key 'STAFFandFACULTY.PRIMARY'
+Result: Duplicate record exists
+
+=======================
+Testing assignRoom()
+=======================
+Result: Success
+
+================================
+Testing removeRoomAssignment()
+================================
+Result: Success
+
+============================
+Testing assignEquipment()
+============================
+LOG ERROR: 1062 (23000): Duplicate entry '2026-03-19 17:10:29' for key 'LOGRECORDS.RTime'
+Result: Logging failure
+
+===============================
+Testing departmentAssignment()
+==============================
+Result: Success
+
+=============================
+Testing addEquipmentType()
+=============================
+addEquipmentType error: 1062 (23000): Duplicate entry 'Laser' for key 'EQUIPMENT.EquipName'
+Result: Duplicate record exists
+
+=============================
+Testing addEquipmentType()
+=============================
+addEquipmentType error: 1062 (23000): Duplicate entry 'Laser' for key 'EQUIPMENT.EquipName'
+Result: Duplicate record exists
+
+=====================================
+Testing Permission Denial (lowpriv)
+==============================
+Result: Incorrect permission level
+
+===============
+WAL Results
+
+===============
+[(1, datetime.datetime(2026, 3, 19, 10, 29, 20), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'ADD_EMPLOYEE employee testemployee@calpoly.edu', None, None, None, 'testemployee@calpoly.edu', None), (2, datetime.datetime(2026, 3, 19, 10, 29, 21), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'ASSIGN employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (3, datetime.datetime(2026, 3, 19, 10, 29, 22), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'REMOVE employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (4, datetime.datetime(2026, 3, 19, 10, 29, 23), 'EQUIPMENT_ASSIGNMENT', 'aamendes@calpoly.edu', 'Bed: 0 -> 5', '0252-00', '033', None, None, 0), (5, datetime.datetime(2026, 3, 19, 10, 29, 24), 'ROOM_DEPT_CHANGE', 'aamendes@calpoly.edu', 'None -> 115400', '0252-00', '033', None, None, None), (6, datetime.datetime(2026, 3, 19, 15, 47, 38), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'ASSIGN employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (8, datetime.datetime(2026, 3, 19, 15, 47, 39), 'EQUIPMENT_ASSIGNMENT', 'aamendes@calpoly.edu', 'Bed: 1 -> 5', '0252-00', '033', None, None, 0), (10, datetime.datetime(2026, 3, 19, 15, 48, 54), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'REMOVE employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (11, datetime.datetime(2026, 3, 19, 15, 48, 55), 'EQUIPMENT_ASSIGNMENT', 'aamendes@calpoly.edu', 'Bed: 1 -> 5', '0252-00', '033', None, None, 0), (13, datetime.datetime(2026, 3, 19, 16, 34, 20), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'ASSIGN employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (14, datetime.datetime(2026, 3, 19, 16, 34, 21), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'REMOVE employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (16, datetime.datetime(2026, 3, 19, 16, 34, 22), 'ROOM_DEPT_CHANGE', 'aamendes@calpoly.edu', '115400 -> 115400', '0252-00', '033', None, None, None), (17, datetime.datetime(2026, 3, 19, 16, 41, 23), 'ROOM_PERSON_ASSIGNMENT', 'jjasbins@calpoly.edu', 'ADD_EMPLOYEE employee 3testemployee@calpoly.edu', None, None, None, '3testemployee@calpoly.edu', None), (18, datetime.datetime(2026, 3, 19, 16, 41, 24), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'ASSIGN employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (19, datetime.datetime(2026, 3, 19, 16, 41, 25), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'REMOVE employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (21, datetime.datetime(2026, 3, 19, 16, 41, 26), 'ROOM_DEPT_CHANGE', 'aamendes@calpoly.edu', '115400 -> 115400', '0252-00', '033', None, None, None), (22, datetime.datetime(2026, 3, 19, 16, 41, 37), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'ASSIGN employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (23, datetime.datetime(2026, 3, 19, 16, 41, 38), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'REMOVE employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (24, datetime.datetime(2026, 3, 19, 16, 41, 39), 'EQUIPMENT_ASSIGNMENT', 'aamendes@calpoly.edu', 'Bed: 1 -> 5', '0252-00', '033', None, None, 0), (26, datetime.datetime(2026, 3, 19, 16, 42, 30), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'ASSIGN employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (27, datetime.datetime(2026, 3, 19, 16, 42, 31), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'REMOVE employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (29, datetime.datetime(2026, 3, 19, 16, 42, 32), 'ROOM_DEPT_CHANGE', 'aamendes@calpoly.edu', '115400 -> 115400', '0252-00', '033', None, None, None), (30, datetime.datetime(2026, 3, 19, 16, 45, 15), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'ASSIGN employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (32, datetime.datetime(2026, 3, 19, 16, 45, 16), 'EQUIPMENT_ASSIGNMENT', 'aamendes@calpoly.edu', 'Bed: 1 -> 5', '0252-00', '033', None, None, 0), (34, datetime.datetime(2026, 3, 19, 16, 52, 39), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'ADD_EMPLOYEE employee 6testemployee@calpoly.edu', None, None, None, '6testemployee@calpoly.edu', None), (35, datetime.datetime(2026, 3, 19, 16, 52, 40), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'REMOVE employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (38, datetime.datetime(2026, 3, 19, 16, 53, 46), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'ASSIGN employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (39, datetime.datetime(2026, 3, 19, 16, 53, 47), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'REMOVE employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (41, datetime.datetime(2026, 3, 19, 16, 53, 48), 'ROOM_DEPT_CHANGE', 'aamendes@calpoly.edu', '115400 -> 115400', '0252-00', '033', None, None, None), (42, datetime.datetime(2026, 3, 19, 17, 0, 8), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'ASSIGN employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (44, datetime.datetime(2026, 3, 19, 17, 0, 9), 'EQUIPMENT_ASSIGNMENT', 'aamendes@calpoly.edu', 'Bed: 1 -> 5', '0252-00', '033', None, None, 0), (46, datetime.datetime(2026, 3, 19, 17, 3, 18), 'ROOM_PERSON_ASSIGNMENT', 'jmmerria@calpoly.edu', 'ADD_EMPLOYEE employee 4testemployee@calpoly.edu', None, None, None, '4testemployee@calpoly.edu', None), (47, datetime.datetime(2026, 3, 19, 17, 3, 19), 'ROOM_PERSON_ASSIGNMENT', 'labdelha@calpoly.edu', 'ADD_EMPLOYEE employee 5testemployee@calpoly.edu', None, None, None, '5testemployee@calpoly.edu', None), (48, datetime.datetime(2026, 3, 19, 17, 3, 20), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'REMOVE employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (51, datetime.datetime(2026, 3, 19, 17, 10, 28), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'ASSIGN employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (52, datetime.datetime(2026, 3, 19, 17, 10, 29), 'ROOM_PERSON_ASSIGNMENT', 'aamendes@calpoly.edu', 'REMOVE employee jmmerria@calpoly.edu', '0252-00', '033', None, 'jmmerria@calpoly.edu', None), (54, datetime.datetime(2026, 3, 19, 17, 10, 30), 'ROOM_DEPT_CHANGE', 'aamendes@calpoly.edu', '115400 -> 115400', '0252-00', '033', None, None, None)]

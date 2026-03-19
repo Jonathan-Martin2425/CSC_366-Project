@@ -147,27 +147,79 @@ if __name__ == "__main__":
 
     # --- Data manipulation tests ---
     print("\n==============================")
-    print("Testing addEmployee()")
+    print("Testing addEmployee() - With View Permission")
     print("==============================")
     result = addEmployee(
-        "aamendes@calpoly.edu",  # userId
+        "jsharpe@calpoly.edu",  # userId
         "Test",
         "Employee",
-        "testemployee@calpoly.edu",
-        "999999",
+        "1testemployee@calpoly.edu",
+        "115500",
         "Professor"
     )
     print("Result:", ERROR_MESSAGES[result])
 
     print("\n==============================")
-    print("Testing addEmployee()")
+    print("Testing addEmployee() - Wrong Department Permissions")
+    print("==============================")
+    result = addEmployee(
+        "jperrine@calpoly.edu",  # userId
+        "Test",
+        "Employee",
+        "2testemployee@calpoly.edu",
+        "115500",
+        "Professor"
+    )
+    print("Result:", ERROR_MESSAGES[result])
+
+    print("\n==============================")
+    print("Testing addEmployee() - Correct Department Permissions")
+    print("==============================")
+    result = addEmployee(
+        "jjasbins@calpoly.edu",  # userId
+        "Test",
+        "Employee",
+        "3testemployee@calpoly.edu",
+        "115500",
+        "Professor"
+    )
+    print("Result:", ERROR_MESSAGES[result])
+
+    print("\n==============================")
+    print("Testing addEmployee() - Same College Update Permissions")
+    print("==============================")
+    result = addEmployee(
+        "jmmerria@calpoly.edu",  # userId
+        "Test",
+        "Employee",
+        "4testemployee@calpoly.edu",
+        "115500",
+        "Professor"
+    )
+    print("Result:", ERROR_MESSAGES[result])
+
+    print("\n==============================")
+    print("Testing addEmployee() - Different College Update Permissions")
+    print("==============================")
+    result = addEmployee(
+        "labdelha@calpoly.edu",  # userId
+        "Test",
+        "Employee",
+        "5testemployee@calpoly.edu",
+        "115500",
+        "Professor"
+    )
+    print("Result:", ERROR_MESSAGES[result])
+
+    print("\n==============================")
+    print("Testing addEmployee() - Admin Permissions")
     print("==============================")
     result = addEmployee(
         "aamendes@calpoly.edu",  # userId
         "Test",
         "Employee",
-        "testemployee@calpoly.edu",
-        "999999",
+        "6testemployee@calpoly.edu",
+        "115500",
         "Professor"
     )
     print("Result:", ERROR_MESSAGES[result])
