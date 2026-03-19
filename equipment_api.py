@@ -4,7 +4,7 @@ import json
 
 
 def getEquipmentLocations(email, equipmentType):
-    if not check_permission("Department View", email):
+    if not check_permission("View", email):
         return {"error": "Access denied."}
 
     DB = make_connection("settings.config")
@@ -42,7 +42,7 @@ def getEquipmentLocations(email, equipmentType):
 
 
 def getSensitiveEquipmentLocations(email, college):
-    if not check_permission("Department View", email):
+    if not check_permission("View", email):
         return {"error": "Access denied."}
 
     DB = make_connection("settings.config")

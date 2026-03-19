@@ -3,7 +3,7 @@ from permissions import check_permission
 import json
 
 def getFloorplans(email):
-    if not check_permission("Department View", email):
+    if not check_permission("View", email):
         return {"error": "Access denied."}
 
     DB = make_connection("settings.config")

@@ -41,7 +41,7 @@ def addEmployee(userId, first, last, email, dept, title):
 
     affiliation = {"department": [dept]}
 
-    if not check_permission("Department Update", userId, affiliation):
+    if not check_permission("Update", userId, affiliation):
         DB.close()
         return ERR_PERMISSION
 
@@ -79,7 +79,7 @@ def assignRoom(userId, email, building, room):
             "college": ""
         }
 
-    if not check_permission("Department Update", userId, affiliation):
+    if not check_permission("Update", userId, affiliation):
         return ERR_PERMISSION
 
     DB = make_connection("settings.config")
@@ -120,7 +120,7 @@ def removeRoomAssignment(userId, email, building, room):
             "college": ""
         }
 
-    if not check_permission("Department Update", userId, affiliation):
+    if not check_permission("Update", userId, affiliation):
         return ERR_PERMISSION
 
     DB = make_connection("settings.config")
@@ -174,7 +174,7 @@ def departmentAssignment(userId, dept, building, room):
             "college": college
         }
 
-        if not check_permission("College Update", userId, affiliation):
+        if not check_permission("Update", userId, affiliation):
             DB.close()
             return ERR_PERMISSION
 
@@ -225,7 +225,7 @@ def assignEquipment(userId, building, room, equipType, newCount):
             "college": ""
         }
 
-    if not check_permission("Department Update", userId, affiliation):
+    if not check_permission("Update", userId, affiliation):
         return ERR_PERMISSION
 
     DB = make_connection("settings.config")

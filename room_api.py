@@ -3,7 +3,7 @@ from permissions import check_permission
 import json
 
 def getRooms(email, buildingNumber, floorNumber):
-    if not check_permission("Department View", email):
+    if not check_permission("View", email):
         return {"error": "Access denied."}
 
     DB = make_connection("settings.config")
@@ -47,7 +47,7 @@ def getRooms(email, buildingNumber, floorNumber):
 
 
 def findRoom(email, buildingNumber, floorNumber, x, y):
-    if not check_permission("Department View", email):
+    if not check_permission("View", email):
         return {"error": "Access denied."}
 
     DB = make_connection("settings.config")
@@ -83,7 +83,7 @@ def findRoom(email, buildingNumber, floorNumber, x, y):
 
 
 def getRoomInfo(email, buildingNumber, roomNumber):
-    if not check_permission("Department View", email):
+    if not check_permission("View", email):
         return {"error": "Access denied."}
 
     DB = make_connection("settings.config")

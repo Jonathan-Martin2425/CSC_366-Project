@@ -3,7 +3,7 @@ from permissions import check_permission
 import json
 
 def getDeptList(email, college):
-    if not check_permission("Department View", email):
+    if not check_permission("View", email):
         return {"error": "Access denied."}
 
     DB = make_connection("settings.config")
@@ -78,7 +78,7 @@ def getDeptList(email, college):
 
 
 def getDeptListEnhanced(email, college):
-    if not check_permission("Department View", email):
+    if not check_permission("View", email):
         return {"error": "Access denied."}
 
     DB = make_connection("settings.config")

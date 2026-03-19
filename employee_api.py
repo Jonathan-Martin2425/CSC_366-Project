@@ -1,4 +1,5 @@
 from connector import make_connection
+from errors_api import ERR_PERMISSION
 from permissions import check_permission
 import json
 
@@ -50,7 +51,7 @@ def computeEmployeeRooms(cursor, email):
 
 
 def getEmployees(email, college, department):
-    if not check_permission("Department View", email):
+    if not check_permission("View", email):
         return {"error": "Access denied."}
 
     DB = make_connection("settings.config")
@@ -154,7 +155,7 @@ def getEmployeeInfo(user: str, identifier):
         "college": employee["College"]
     }
 
-    if not check_permission("Department View", user, affiliation):
+    if not check_permission("View", user, affiliation):
         cursor.close()
         DB.close()
         return {"error": ERR_PERMISSION}
