@@ -43,7 +43,7 @@ def setup_users():
         # Low privilege user
         ensure_test_user(
             cursor,
-            "lowpriv@calpoly.edu",
+            "abuffa@calpoly.edu",
             "Department View Level",
             "109400",
             "BCSM"
@@ -80,6 +80,18 @@ if __name__ == "__main__":
     print(json.dumps(room, indent=4))
 
     print("\n==============================")
+    print("Testing findRoom(buildingNumber: 033, floorNumber: 1, x: 0, y: 0)")
+    print("==============================")
+    room = findRoom("jperrine@calpoly.edu", "033", "1", 0, 0)
+    print(json.dumps(room, indent=4))
+
+    print("\n==============================")
+    print("Testing findRoom(buildingNumber: 181, floorNumber: 1, x: 0, y: 0)")
+    print("==============================")
+    room = findRoom("jperrine@calpoly.edu", "181", "1", 0, 0)
+    print(json.dumps(room, indent=4))
+
+    print("\n==============================")
     print("Testing getRoomInfo(buildingNumber: 033, roomNumber: 0387-00)")
     print("==============================")
     info = getRoomInfo("jperrine@calpoly.edu", "033", "0387-00")
@@ -100,8 +112,22 @@ if __name__ == "__main__":
     print("\n==============================")
     print("Testing getEmployeeInfo()")
     print("==============================")
-    employee = getEmployeeInfo({"Email": "atheobol@calpoly.edu"})
+    employee = getEmployeeInfo("aamendes@calpoly.edu", {"Email": "atheobol@calpoly.edu"})
     print(json.dumps(employee, indent=4))
+
+    print("\n==============================")
+    print("Testing getEmployeeInfo()")
+    print("==============================")
+    employee = getEmployeeInfo("jsharpe@calpoly.edu", {"Email": "atheobol@calpoly.edu"})
+    print(json.dumps(employee, indent=4))
+
+    print("\n==============================")
+    print("Testing getEmployeeInfo()")
+    print("==============================")
+    employee = getEmployeeInfo("pander14@calpoly.edu", {"Email": "atheobol@calpoly.edu"})
+    print(json.dumps(employee, indent=4))
+
+
 
     print("\n==============================")
     print("Testing getEquipmentLocations()")
@@ -156,7 +182,7 @@ if __name__ == "__main__":
     print("\n==============================")
     print("Testing departmentAssignment()")
     print("==============================")
-    result = departmentAssignment("aamendes@calpoly.edu", "105-0002310", "033", "0252-00")
+    result = departmentAssignment("aamendes@calpoly.edu", "115400", "033", "0252-00")
     print("Result:", ERROR_MESSAGES[result])
 
     print("\n==============================")
@@ -168,7 +194,7 @@ if __name__ == "__main__":
     print("\n==============================")
     print("Testing Permission Denial (lowpriv)")
     print("==============================")
-    result = assignEquipment("lowpriv@calpoly.edu", "033", "0252-00", "Bed", 3)
+    result = assignEquipment("abuffa@calpoly.edu", "033", "0252-00", "Bed", 3)
     print("Result:", ERROR_MESSAGES[result])
 
     # --- WAL Results ---

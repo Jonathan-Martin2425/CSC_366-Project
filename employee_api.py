@@ -89,7 +89,7 @@ def getEmployees(college, department):
     return result
 
 
-def getEmployeeInfo(identifier):
+def getEmployeeInfo(user: str, identifier):
     DB = make_connection("settings.config")
     cursor = DB.cursor(dictionary=True, buffered=True)
 
@@ -100,7 +100,9 @@ def getEmployeeInfo(identifier):
                 STAFFandFACULTY.FirstName,
                 STAFFandFACULTY.LastName,
                 STAFFandFACULTY.Title,
-                DEPARTMENTS.DName
+                DEPARTMENTS.DName,
+                DEPARTMENTS.DId,
+                DEPARTMENTS.College
             FROM STAFFandFACULTY
             JOIN DEPARTMENTS
                 ON STAFFandFACULTY.DeptID = DEPARTMENTS.DId
@@ -116,7 +118,9 @@ def getEmployeeInfo(identifier):
                 STAFFandFACULTY.FirstName,
                 STAFFandFACULTY.LastName,
                 STAFFandFACULTY.Title,
-                DEPARTMENTS.DName
+                DEPARTMENTS.DName,
+                DEPARTMENTS.DId,
+                DEPARTMENTS.College
             FROM STAFFandFACULTY
             JOIN DEPARTMENTS
                 ON STAFFandFACULTY.DeptID = DEPARTMENTS.DId
@@ -142,6 +146,16 @@ def getEmployeeInfo(identifier):
         cursor.close()
         DB.close()
         return None
+
+    affiliation = {
+        "department": [employee["DId"]],
+        "college": employee["College"]
+    }
+
+    if not check_permission("Department View", user, affiliation):
+        cursor.close()
+        DB.close()
+        return {"error": ERR_PERMISSION}
 
     room_list, total_sqft = computeEmployeeRooms(cursor, employee["Email"])
 
