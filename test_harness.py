@@ -1,10 +1,11 @@
 from connector import make_connection
-from departments_api import getDeptListEnhanced
+from departments_api import getDeptList, getDeptListEnhanced
 from employee_api import getEmployees, getEmployeeInfo
 from equipment_api import getEquipmentLocations, getSensitiveEquipmentLocations
 from floorplan_api import getFloorplans
 from room_api import getRooms, findRoom, getRoomInfo
 from dataManipulation_api import *
+import json
 
 def ensure_test_user(cursor, email, permission, dept=None, college=None):
     cursor.execute("SELECT Email FROM USERS WHERE Email=%s", (email,))
@@ -60,28 +61,31 @@ if __name__ == "__main__":
     print("Testing getFloorplans()")
     print("==============================")
     plans = getFloorplans()
-    for plan in plans:
-        print(plan)
+    print(json.dumps(plans, indent=4))
 
     print("\n==============================")
     print("Testing getRooms()")
     print("==============================")
     rooms = getRooms("033", "1")
-    for room in rooms:
-        print(room)
+    print(json.dumps(rooms, indent=4))
 
     print("\n==============================")
     print("Testing findRoom()")
     print("==============================")
     room = findRoom("033", "1", 301, 899)
-    print(room)
+    print(json.dumps(room, indent=4))
 
     print("\n==============================")
     print("Testing getRoomInfo()")
     print("==============================")
     info = getRoomInfo("033", "0387-00")
-    import json
     print(json.dumps(info, indent=4))
+
+    print("\n==============================")
+    print("Testing getDeptList()")
+    print("==============================")
+    depts = getDeptList("BCSM")
+    print(json.dumps(depts, indent=4))
 
     print("\n==============================")
     print("Testing getEmployees()")
@@ -114,8 +118,7 @@ if __name__ == "__main__":
     print("Testing getDeptListEnhanced()")
     print("==============================")
     depts = getDeptListEnhanced("BCSM")
-    for dept in depts:
-        print(dept)
+    print(json.dumps(depts, indent=4))
 
     # --- Data manipulation tests ---
     print("\n==============================")
