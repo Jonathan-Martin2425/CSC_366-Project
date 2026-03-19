@@ -3,7 +3,10 @@ from permissions import check_permission
 import json
 
 
-def getEquipmentLocations(equipmentType):
+def getEquipmentLocations(email, equipmentType):
+    if not check_permission("Department View", email):
+        return {"error": "Access denied."}
+
     DB = make_connection("settings.config")
     cursor = DB.cursor()
 
@@ -38,7 +41,10 @@ def getEquipmentLocations(equipmentType):
     return rooms
 
 
-def getSensitiveEquipmentLocations(college):
+def getSensitiveEquipmentLocations(email, college):
+    if not check_permission("Department View", email):
+        return {"error": "Access denied."}
+
     DB = make_connection("settings.config")
     cursor = DB.cursor(dictionary=True, buffered=True)
 
@@ -89,10 +95,10 @@ def getSensitiveEquipmentLocations(college):
 
 if __name__ == "__main__":
     print("Testing getEquipmentLocations()")
-    Rooms = getEquipmentLocations("ULT Freezer")
+    Rooms = getEquipmentLocations("jperrine@calpoly.edu", "ULT Freezer")
     print(json.dumps(Rooms, indent=4))
 
 
     print("\nTesting getSensitiveEquipmentLocations()")
-    rooms = getSensitiveEquipmentLocations("BCSM")
+    rooms = getSensitiveEquipmentLocations("jperrine@calpoly.edu", "BCSM")
     print(json.dumps(rooms, indent=4))

@@ -1,9 +1,11 @@
 from connector import make_connection
 from permissions import check_permission
-from errors_api import *
 import json
 
-def getDeptList(college):
+def getDeptList(email, college):
+    if not check_permission("Department View", email):
+        return {"error": "Access denied."}
+
     DB = make_connection("settings.config")
     cursor = DB.cursor(dictionary=True, buffered=True)
 
@@ -75,7 +77,10 @@ def getDeptList(college):
     return result
 
 
-def getDeptListEnhanced(college):
+def getDeptListEnhanced(email, college):
+    if not check_permission("Department View", email):
+        return {"error": "Access denied."}
+
     DB = make_connection("settings.config")
     cursor = DB.cursor(dictionary=True, buffered=True)
 
@@ -198,9 +203,9 @@ def getDeptListEnhanced(college):
 
 if __name__ == "__main__":
     print("Testing getDeptList()")
-    depts = getDeptList("BCSM")
+    depts = getDeptList("jperrine@calpoly.edu", "BCSM")
     print(json.dumps(depts, indent=4))
 
     print("\nTesting getDeptListEnhanced()")
-    depts = getDeptListEnhanced("BCSM")
+    depts = getDeptListEnhanced("jperrine@calpoly.edu", "BCSM")
     print(json.dumps(depts, indent=4))

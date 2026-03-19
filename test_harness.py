@@ -61,24 +61,25 @@ if __name__ == "__main__":
     # makes it so all prints get put into "output.txt"
     sys.stdout = open("output.txt", "w")
 
-    print("\n==============================")
+    print("\n=========================")
     print("Testing getFloorplans()")
-    print("==============================")
+    print("=========================")
     plans = getFloorplans("jperrine@calpoly.edu")
     print(json.dumps(plans, indent=4))
 
-    print("\n==============================")
+    print("\n=======================================================")
     print("Testing getRooms(buildingNumber: 033, floorNumber: 1)")
-    print("==============================")
+    print("=======================================================")
     rooms = getRooms("jperrine@calpoly.edu", "033", "1")
     print(json.dumps(rooms, indent=4))
 
-    print("\n==============================")
+    print("\n=======================================================================")
     print("Testing findRoom(buildingNumber: 033, floorNumber: 1, x: 301, y: 899)")
-    print("==============================")
+    print("=======================================================================")
     room = findRoom("jperrine@calpoly.edu", "033", "1", 301, 899)
     print(json.dumps(room, indent=4))
 
+<<<<<<< HEAD
     print("\n==============================")
     print("Testing findRoom(buildingNumber: 033, floorNumber: 1, x: 0, y: 0)")
     print("==============================")
@@ -92,21 +93,24 @@ if __name__ == "__main__":
     print(json.dumps(room, indent=4))
 
     print("\n==============================")
+=======
+    print("\n===============================================================")
+>>>>>>> e2ab2592511b9044846826cd6265bf6866828c4a
     print("Testing getRoomInfo(buildingNumber: 033, roomNumber: 0387-00)")
-    print("==============================")
+    print("===============================================================")
     info = getRoomInfo("jperrine@calpoly.edu", "033", "0387-00")
     print(json.dumps(info, indent=4))
 
-    print("\n==============================")
+    print("\n===================================")
     print("Testing getDeptList(college: BCSM)")
-    print("==============================")
-    depts = getDeptList("BCSM")
+    print("===================================")
+    depts = getDeptList("jperrine@calpoly.edu", "BCSM")
     print(json.dumps(depts, indent=4))
 
-    print("\n==============================")
-    print("Testing getEmployees()")
-    print("==============================")
-    employees = getEmployees("BCSM", "Statistics")
+    print("\n============================================================")
+    print("Testing getEmployees(college: BCSM, department: Statistics)")
+    print("============================================================")
+    employees = getEmployees("jperrine@calpoly.edu", "BCSM", "Statistics")
     print(json.dumps(employees, indent=4))
 
     print("\n==============================")
@@ -127,24 +131,22 @@ if __name__ == "__main__":
     employee = getEmployeeInfo("pander14@calpoly.edu", {"Email": "atheobol@calpoly.edu"})
     print(json.dumps(employee, indent=4))
 
-
-
-    print("\n==============================")
-    print("Testing getEquipmentLocations()")
-    print("==============================")
-    Rooms = getEquipmentLocations("ULT Freezer")
+    print("\n==========================================================")
+    print("Testing getEquipmentLocations(equipmentType: ULT Freezer)")
+    print("==========================================================")
+    Rooms = getEquipmentLocations("jperrine@calpoly.edu", "ULT Freezer")
     print(json.dumps(Rooms, indent=4))
 
-    print("\n==============================")
-    print("Testing getSensitiveEquipmentLocations()")
-    print("==============================")
-    rooms = getSensitiveEquipmentLocations("BCSM")
+    print("\n======================================================")
+    print("Testing getSensitiveEquipmentLocations(college: BCSM)")
+    print("======================================================")
+    rooms = getSensitiveEquipmentLocations("jperrine@calpoly.edu", "BCSM")
     print(json.dumps(rooms, indent=4))
 
-    print("\n==============================")
+    print("\n===========================================")
     print("Testing getDeptListEnhanced(college: BCSM)")
-    print("==============================")
-    depts = getDeptListEnhanced("BCSM")
+    print("===========================================")
+    depts = getDeptListEnhanced("jperrine@calpoly.edu", "BCSM")
     print(json.dumps(depts, indent=4))
 
     # --- Data manipulation tests ---
@@ -161,46 +163,56 @@ if __name__ == "__main__":
     )
     print("Result:", ERROR_MESSAGES[result])
 
-    print("\n==============================")
+    print("\n=======================")
     print("Testing assignRoom()")
-    print("==============================")
+    print("=======================")
     result = assignRoom("aamendes@calpoly.edu", "jmmerria@calpoly.edu", "033", "0252-00")
     print("Result:", ERROR_MESSAGES[result])
 
-    print("\n==============================")
+    print("\n================================")
     print("Testing removeRoomAssignment()")
-    print("==============================")
+    print("================================")
     result = removeRoomAssignment("aamendes@calpoly.edu", "jmmerria@calpoly.edu", "033", "0252-00")
     print("Result:", ERROR_MESSAGES[result])
 
-    print("\n==============================")
+    print("\n============================")
     print("Testing assignEquipment()")
-    print("==============================")
+    print("============================")
     result = assignEquipment("aamendes@calpoly.edu", "033", "0252-00", "Bed", 5)
     print("Result:", ERROR_MESSAGES[result])
 
-    print("\n==============================")
+    print("\n===============================")
     print("Testing departmentAssignment()")
+<<<<<<< HEAD
     print("==============================")
     result = departmentAssignment("aamendes@calpoly.edu", "115400", "033", "0252-00")
+=======
+    print("===============================")
+    result = departmentAssignment("aamendes@calpoly.edu", "105-0002310", "033", "0252-00")
+>>>>>>> e2ab2592511b9044846826cd6265bf6866828c4a
     print("Result:", ERROR_MESSAGES[result])
 
-    print("\n==============================")
+    print("\n=============================")
     print("Testing addEquipmentType()")
-    print("==============================")
+    print("=============================")
     result = addEquipmentType("aamendes@calpoly.edu", "Laser", 1)
     print("Result:", ERROR_MESSAGES[result])
 
-    print("\n==============================")
+    print("\n=====================================")
     print("Testing Permission Denial (lowpriv)")
+<<<<<<< HEAD
     print("==============================")
     result = assignEquipment("abuffa@calpoly.edu", "033", "0252-00", "Bed", 3)
+=======
+    print("=====================================")
+    result = assignEquipment("lowpriv@calpoly.edu", "033", "0252-00", "Bed", 3)
+>>>>>>> e2ab2592511b9044846826cd6265bf6866828c4a
     print("Result:", ERROR_MESSAGES[result])
 
     # --- WAL Results ---
-    print("\n================================")
+    print("\n===============")
     print("WAL Results")
-    print("\n==================================")
+    print("\n===============")
     DB = make_connection("settings.config")
     cursor = DB.cursor()
     cursor.execute("SELECT * FROM LOGRECORDS")

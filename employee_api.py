@@ -1,6 +1,5 @@
 from connector import make_connection
 from permissions import check_permission
-from errors_api import *
 import json
 
 def computeEmployeeRooms(cursor, email):
@@ -50,7 +49,10 @@ def computeEmployeeRooms(cursor, email):
     return room_list, round(total_sqft, 2)
 
 
-def getEmployees(college, department):
+def getEmployees(email, college, department):
+    if not check_permission("Department View", email):
+        return {"error": "Access denied."}
+
     DB = make_connection("settings.config")
     cursor = DB.cursor(dictionary=True, buffered=True)
 
@@ -173,10 +175,11 @@ def getEmployeeInfo(user: str, identifier):
 
 
 if __name__ == "__main__":
+
     print("Testing getEmployees()")
-    employees = getEmployees("BCSM", "Statistics")
+    employees = getEmployees("jperrine@calpoly.edu", "BCSM", "Statistics")
     print(json.dumps(employees, indent=4))
 
     print("\nTesting getEmployeeInfo()")
-    employee = getEmployeeInfo({"Email": "atheobol@calpoly.edu"})
+    employee = getEmployeeInfo("jperrine@calpoly.edu", {"Email": "atheobol@calpoly.edu"})
     print(json.dumps(employee, indent=4))

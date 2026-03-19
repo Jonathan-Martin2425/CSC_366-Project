@@ -4,7 +4,7 @@ import json
 
 def getRooms(email, buildingNumber, floorNumber):
     if not check_permission("Department View", email):
-        return {"error": "Access denied. Insufficient permissions."}
+        return {"error": "Access denied."}
 
     DB = make_connection("settings.config")
     cursor = DB.cursor()
@@ -48,7 +48,7 @@ def getRooms(email, buildingNumber, floorNumber):
 
 def findRoom(email, buildingNumber, floorNumber, x, y):
     if not check_permission("Department View", email):
-        return {"error": "Access denied. Insufficient permissions."}
+        return {"error": "Access denied."}
 
     DB = make_connection("settings.config")
     cursor = DB.cursor()
@@ -84,7 +84,7 @@ def findRoom(email, buildingNumber, floorNumber, x, y):
 
 def getRoomInfo(email, buildingNumber, roomNumber):
     if not check_permission("Department View", email):
-        return {"error": "Access denied. Insufficient permissions."}
+        return {"error": "Access denied."}
 
     DB = make_connection("settings.config")
     cursor = DB.cursor(dictionary=True)
