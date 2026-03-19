@@ -106,16 +106,14 @@ if __name__ == "__main__":
     print("\n==============================")
     print("Testing getEquipmentLocations()")
     print("==============================")
-    rooms = getEquipmentLocations("Bed")
-    for room in rooms:
-        print(room)
+    Rooms = getEquipmentLocations("ULT Freezer")
+    print(json.dumps(Rooms, indent=4))
 
     print("\n==============================")
     print("Testing getSensitiveEquipmentLocations()")
     print("==============================")
     rooms = getSensitiveEquipmentLocations("BCSM")
-    for room in rooms:
-        print(room)
+    print(json.dumps(rooms, indent=4))
 
     print("\n==============================")
     print("Testing getDeptListEnhanced(college: BCSM)")
