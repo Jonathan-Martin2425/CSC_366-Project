@@ -47,18 +47,18 @@ def addEmployee(userId, first, last, email, dept, title):
 
     try:
 
-        log_result = logRoomAssignmentPerson(userId, None, None, email, "ADD_EMPLOYEE")
-
-        if log_result != SUCCESS:
-            DB.close()
-            return ERR_LOGGING
-
         cursor.execute("""
         INSERT INTO STAFFandFACULTY
         VALUES (%s,%s,%s,%s,%s)
         """, (email, first, last, title, dept))
 
         DB.commit()
+
+        log_result = logRoomAssignmentPerson(userId, None, None, email, "ADD_EMPLOYEE")
+
+        if log_result != SUCCESS:
+            DB.close()
+            return ERR_LOGGING
         DB.close()
 
         return SUCCESS
@@ -71,11 +71,13 @@ def addEmployee(userId, first, last, email, dept, title):
 
 # ----------------------------------------
 def assignRoom(userId, email, building, room):
-
     affiliation = getRoomAffiliation(building, room)
 
     if affiliation is None:
-        return ERR_NOT_FOUND
+        affiliation = {
+            "department": [],
+            "college": ""
+        }
 
     if not check_permission("Department Update", userId, affiliation):
         return ERR_PERMISSION
@@ -85,16 +87,16 @@ def assignRoom(userId, email, building, room):
 
     try:
 
+        cursor.execute("""
+        INSERT INTO ROOMOCCUPANTS
+        VALUES (%s,%s,%s,NOW())
+        """, (email, building, room))
+
         log_result = logRoomAssignmentPerson(userId, building, room, email, "ASSIGN")
 
         if log_result != SUCCESS:
             DB.close()
             return ERR_LOGGING
-
-        cursor.execute("""
-        INSERT INTO ROOMOCCUPANTS
-        VALUES (%s,%s,%s,NOW())
-        """, (email, building, room))
 
         DB.commit()
         DB.close()
@@ -113,7 +115,10 @@ def removeRoomAssignment(userId, email, building, room):
     affiliation = getRoomAffiliation(building, room)
 
     if affiliation is None:
-        return ERR_NOT_FOUND
+        affiliation = {
+            "department": [],
+            "college": ""
+        }
 
     if not check_permission("Department Update", userId, affiliation):
         return ERR_PERMISSION
@@ -123,16 +128,16 @@ def removeRoomAssignment(userId, email, building, room):
 
     try:
 
+        cursor.execute("""
+        DELETE FROM ROOMOCCUPANTS
+        WHERE Email=%s AND BNumber=%s AND RNumber=%s
+        """, (email, building, room))
+
         log_result = logRoomAssignmentPerson(userId, building, room, email, "REMOVE")
 
         if log_result != SUCCESS:
             DB.close()
             return ERR_LOGGING
-
-        cursor.execute("""
-        DELETE FROM ROOMOCCUPANTS
-        WHERE Email=%s AND BNumber=%s AND RNumber=%s
-        """, (email, building, room))
 
         DB.commit()
         DB.close()
@@ -182,12 +187,6 @@ def departmentAssignment(userId, dept, building, room):
         result = cursor.fetchone()
         oldDept = result[0] if result else None
 
-        log_result = logRoomDeptChange(userId, building, room, oldDept, dept)
-
-        if log_result != SUCCESS:
-            DB.close()
-            return ERR_LOGGING
-
         cursor.execute("""
         DELETE FROM DEPTOCCUPANT
         WHERE BNumber=%s AND RNumber=%s
@@ -197,6 +196,12 @@ def departmentAssignment(userId, dept, building, room):
         INSERT INTO DEPTOCCUPANT
         VALUES (%s,%s,%s,1,NOW())
         """, (dept, building, room))
+
+        log_result = logRoomDeptChange(userId, building, room, oldDept, dept)
+
+        if log_result != SUCCESS:
+            DB.close()
+            return ERR_LOGGING
 
         DB.commit()
         DB.close()
@@ -215,7 +220,10 @@ def assignEquipment(userId, building, room, equipType, newCount):
     affiliation = getRoomAffiliation(building, room)
 
     if affiliation is None:
-        return ERR_NOT_FOUND
+        affiliation = {
+            "department": [],
+            "college": ""
+        }
 
     if not check_permission("Department Update", userId, affiliation):
         return ERR_PERMISSION
@@ -232,19 +240,6 @@ def assignEquipment(userId, building, room, equipType, newCount):
         """, (equipType, building, room))
 
         before = cursor.fetchone()[0]
-
-        log_result = logEquipmentAssignment(
-            userId,
-            building,
-            room,
-            equipType,
-            before,
-            newCount
-        )
-
-        if log_result != SUCCESS:
-            DB.close()
-            return ERR_LOGGING
 
         if newCount == 0:
 
@@ -267,6 +262,19 @@ def assignEquipment(userId, building, room, equipType, newCount):
             SET DateAssigned=NOW()
             WHERE EquipType=%s AND BNumber=%s AND RNumber=%s
             """, (equipType, building, room))
+
+        log_result = logEquipmentAssignment(
+            userId,
+            building,
+            room,
+            equipType,
+            before,
+            newCount
+        )
+
+        if log_result != SUCCESS:
+            DB.close()
+            return ERR_LOGGING
 
         DB.commit()
         DB.close()
@@ -292,11 +300,11 @@ def addEquipmentType(userId, name, sensitive):
 
         cursor.execute("""
 INSERT INTO EQUIPMENT (TypeId, EquipName, isSensitive)
-VALUES (
-    (SELECT IFNULL(MAX(TypeId), 0) + 1 FROM EQUIPMENT),
-    %s,
-    %s
-)
+SELECT next_id, %s, %s
+FROM (
+    SELECT IFNULL(MAX(TypeId), 0) + 1 AS next_id
+    FROM EQUIPMENT
+) AS x
 """, (name, sensitive))
 
         DB.commit()

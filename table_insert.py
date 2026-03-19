@@ -72,7 +72,7 @@ def insert_building(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract):
 
 def insert_departments(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, filename: str):
     departmentCSV = read_csv_with_encoding(filename, has_header=False)
-    data = [('999998', 'CENG', 'Computer Science')]
+    data = [('111500', 'CENG', 'Comp Sci & Software Eng')]
     for department in departmentCSV:
         department = department[0]
         curTuple = parser_util.parse_department(department)
@@ -103,9 +103,7 @@ def insert_from_furniture(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstra
 
 def insert_staffAndFaculty(cursor: MySQLCursorAbstract, DB: MySQLConnectionAbstract, filename: str):
     staffCSV = read_csv_with_encoding(filename, has_header=True)
-    data, emails, i = [("jdoe@calpoly.edu", "Jane", "Doe", "None", "999998"),
-                       ("jdoe1@calpoly.edu", "Jane", "Doe", "None", "999998"),
-                       ("jdoe2@calpoly.edu", "Jane", "Doe", "None", "999998")], [], 1
+    data, emails, i = [], [], 1
     for staff in staffCSV:
         email = staff["Email Address"]
         deptID = staff["Deptid Code"]
@@ -444,12 +442,12 @@ if __name__ == "__main__":
     # Add default users
     users_to_add = [
 
-        # adimin
-        {"Email": "admin@calpoly.edu", "FirstName": "Admin", "LastName": "User", "URole": "Admin", "DeptID": "115100", "CollegeID": "BCSM", "UPassword": "adminpass", "UPermissionLevel": "God"},
+        # admin
+        {"Email": "aamendes@calpoly.edu", "FirstName": "Anthony", "LastName": "Mendes", "URole": "Admin", "DeptID": "115400", "CollegeID": "BCSM", "UPassword": "adminpass", "UPermissionLevel": "God"},
 
         # college update level
         {"Email": "jmmerria@calpoly.edu", "FirstName": "John", "LastName": "Merriam", "URole": "Admin", "DeptID": "115100", "CollegeID": "BCSM", "UPassword": "password", "UPermissionLevel": "College Update"},
-        {"Email": "jdoe@calpoly.edu", "FirstName": "Jane", "LastName": "Doe", "URole": "Admin", "DeptID": "999998", "CollegeID": "CENG", "UPassword": "password", "UPermissionLevel": "College Update"},
+        {"Email": "labdelha@calpoly.edu", "FirstName": "Laila", "LastName": "Abdelhafeez", "URole": "Admin", "DeptID": "111500", "CollegeID": "CENG", "UPassword": "password", "UPermissionLevel": "College Update"},
 
         # department update level
         {"Email": "jhagen@calpoly.edu", "FirstName": "John", "LastName": "Hagen", "URole": "User", "DeptID": "115200", "CollegeID": "BCSM", "UPassword": "lowpass", "UPermissionLevel": "Department Update"},
@@ -457,11 +455,11 @@ if __name__ == "__main__":
         {"Email": "jperrine@calpoly.edu", "FirstName": "John", "LastName": "Perrine", "URole": "User", "DeptID": "115100", "CollegeID": "BCSM",  "UPassword": "lowpass", "UPermissionLevel": "Department Update"},
 
         # college view level
-        {"Email": "jdoe1@calpoly.edu", "FirstName": "Jane", "LastName": "Doe", "URole": "User", "DeptID": "999998", "CollegeID": "CENG", "UPassword": "lowpass", "UPermissionLevel": "College View"},
+        {"Email": "pander14@calpoly.edu", "FirstName": "Paul", "LastName": "Anderson", "URole": "User", "DeptID": "111500", "CollegeID": "CENG", "UPassword": "lowpass", "UPermissionLevel": "College View"},
         {"Email": "jsharpe@calpoly.edu", "FirstName": "John", "LastName": "Sharpe", "URole": "User", "DeptID": "115500", "CollegeID": "BCSM", "UPassword": "lowpass", "UPermissionLevel": "College View"},
 
         # department view level
-        {"Email": "lowpriv@calpoly.edu", "FirstName": "Low", "LastName": "Privilege", "URole": "User", "DeptID": "115300", "CollegeID": "BCSM", "UPassword": "lowpass", "UPermissionLevel": "Department View"},
+        {"Email": "abuffa@calpoly.edu", "FirstName": "Anthony", "LastName": "Buffa", "URole": "User", "DeptID": "115500", "CollegeID": "BCSM", "UPassword": "lowpass", "UPermissionLevel": "Department View"},
 
     ]
     for user in users_to_add:
