@@ -25,7 +25,7 @@ def setup_users():
         # Admin (no restriction needed)
         ensure_test_user(
             cursor,
-            "admin@calpoly.edu",
+            "aamendes@calpoly.edu",
             "God Level",
             "109400",
             "BCSM"
@@ -126,11 +126,11 @@ if __name__ == "__main__":
     print("Testing addEmployee()")
     print("==============================")
     result = addEmployee(
-        "admin@calpoly.edu",  # userId
+        "aamendes@calpoly.edu",  # userId
         "Test",
         "Employee",
         "testemployee@calpoly.edu",
-        "105-0002310",
+        "999999",
         "Professor"
     )
     print("Result:", ERROR_MESSAGES[result])
@@ -138,31 +138,31 @@ if __name__ == "__main__":
     print("\n==============================")
     print("Testing assignRoom()")
     print("==============================")
-    result = assignRoom("admin@calpoly.edu", "testemployee@calpoly.edu", "033", "0252-00")
+    result = assignRoom("aamendes@calpoly.edu", "jmmerria@calpoly.edu", "033", "0252-00")
     print("Result:", ERROR_MESSAGES[result])
 
     print("\n==============================")
     print("Testing removeRoomAssignment()")
     print("==============================")
-    result = removeRoomAssignment("admin@calpoly.edu", "testemployee@calpoly.edu", "033", "0252-00")
+    result = removeRoomAssignment("aamendes@calpoly.edu", "jmmerria@calpoly.edu", "033", "0252-00")
     print("Result:", ERROR_MESSAGES[result])
 
     print("\n==============================")
     print("Testing assignEquipment()")
     print("==============================")
-    result = assignEquipment("admin@calpoly.edu", "033", "0252-00", "Bed", 5)
+    result = assignEquipment("aamendes@calpoly.edu", "033", "0252-00", "Bed", 5)
     print("Result:", ERROR_MESSAGES[result])
 
     print("\n==============================")
     print("Testing departmentAssignment()")
     print("==============================")
-    result = departmentAssignment("admin@calpoly.edu", "105-0002310", "033", "0252-00")
+    result = departmentAssignment("aamendes@calpoly.edu", "105-0002310", "033", "0252-00")
     print("Result:", ERROR_MESSAGES[result])
 
     print("\n==============================")
     print("Testing addEquipmentType()")
     print("==============================")
-    result = addEquipmentType("admin@calpoly.edu", "Laser", 1)
+    result = addEquipmentType("aamendes@calpoly.edu", "Laser", 1)
     print("Result:", ERROR_MESSAGES[result])
 
     print("\n==============================")

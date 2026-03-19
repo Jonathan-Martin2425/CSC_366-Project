@@ -9,20 +9,19 @@ def _write_log(action, userId, building=None, room=None, email=None, equipID=Non
         DB = make_connection("settings.config")
         cursor = DB.cursor()
 
-        # 🔥 FIX: replace None with dummy values
-        if building is None:
+        # it is okay for room and building to be NULL because we also log just STAFF additions that don't involve rooms
+        """if building is None:
             building = "N/A"
         if room is None:
-            room = "N/A"
+            room = "N/A"""""
 
         query = """
         INSERT INTO LOGRECORDS
         (RTime, RType, RUser, BNumber, RNumber, Email, EquipID, RAction)
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
+        VALUES (NOW(),%s,%s,%s,%s,%s,%s,%s)
         """
 
         cursor.execute(query, (
-            datetime.datetime.now(),
             action,
             userId,
             building,
