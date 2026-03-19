@@ -4,7 +4,7 @@
 This project is a Python-based API system for managing and querying room, department, employee, and equipment data for Cal Poly's buildings. It connects to a MySQL database and provides a set of API functions for retrieving and managing this data with role-based access control.
 
 ## Prerequisites
-- Python 3.x
+- Python 3.9
 - MySQL Connector for Python
 - Access to the project's MySQL database server
 
